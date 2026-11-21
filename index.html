@@ -834,7 +834,6 @@ textarea {
   </ul>
 </div>
 
-
 <!-- Rekod Terkini di Dashboard -->
       <div class="card">
         <div class="card-header">
@@ -953,30 +952,29 @@ textarea {
           </div>
         </div>
 
-     
 <!-- BAHAGIAN 5: PATIENT CARE -->
 <div class="card">
   <div class="card-header">
     <h2 class="card-title">PATIENT CARE</h2>
   </div>
 
-  <div class="form-grid form-grid-2">
+<div class="form-grid form-grid-2">
 
-    <!-- SPO2 BACaan PERTAMA -->
+<!-- SPO2 BACaan PERTAMA -->
     <div class="form-group">
       <label for="spo2">Spo² (% / Oxygen Support)</label>
       <input type="text" id="spo2"
         placeholder="Contoh: 89% URA">
     </div>
 
-    <!-- SPO2 REPEAT -->
+<!-- SPO2 REPEAT -->
     <div class="form-group">
       <label for="spo2Repeat">↻ Repeat SpO²</label>
       <input type="text" id="spo2Repeat"
         placeholder="Contoh: 100% HFM">
     </div>
 
-    <!-- BP PERTAMA -->
+<!-- BP PERTAMA -->
     <div class="form-group">
       <label>BP (mmHg)</label>
       <div class="bp-wrapper">
@@ -988,7 +986,7 @@ textarea {
       </div>
     </div>
 
-    <!-- BP REPEAT -->
+<!-- BP REPEAT -->
     <div class="form-group">
       <label>↻ Repeat BP (mmHg)</label>
       <div class="bp-wrapper">
@@ -1000,28 +998,28 @@ textarea {
       </div>
     </div>
 
-    <!-- PULSE PERTAMA -->
+<!-- PULSE PERTAMA -->
     <div class="form-group">
       <label for="pulse">Pulse (bpm)</label>
       <input type="number" id="pulse"
         min="0" max="300" placeholder="Contoh: 56">
     </div>
 
-    <!-- PULSE REPEAT -->
+<!-- PULSE REPEAT -->
     <div class="form-group">
       <label for="pulseRepeat">↻ Repeat Pulse (bpm)</label>
       <input type="number" id="pulseRepeat"
         min="0" max="300" placeholder="Contoh: 89">
     </div>
 
-    <!-- RR -->
+<!-- RR -->
     <div class="form-group">
       <label for="rrMn">RR/MN</label>
       <input type="number" id="rrMn"
         min="0" max="100" placeholder="Contoh: 18">
     </div>
 
-    <!-- CONSCIOUS LEVEL -->
+<!-- CONSCIOUS LEVEL -->
     <div class="form-group">
       <label for="consciousLevel">Conscious Level</label>
       <select id="consciousLevel">
@@ -1033,7 +1031,7 @@ textarea {
       </select>
     </div>
 
-    <!-- GLUCOSE -->
+<!-- GLUCOSE -->
     <div class="form-group">
       <label for="glucoseMeter">GLUCOSE METER (mmol/L)</label>
       <input type="number" id="glucoseMeter"
@@ -1041,13 +1039,13 @@ textarea {
         placeholder="Contoh: 5.6">
     </div>
 
-  </div>
+</div>
 
-  <!-- GCS SUB-PANEL -->
+<!-- GCS SUB-PANEL -->
   <div class="sub-panel">
     <div class="sub-panel-title">GCS</div>
 
-    <div class="gcs-grid">
+<div class="gcs-grid">
       <div class="form-group">
         <label for="gcsE">E:</label>
         <input type="number" id="gcsE"
@@ -1055,21 +1053,21 @@ textarea {
           oninput="calculateGCSTotal()">
       </div>
 
-      <div class="form-group">
+<div class="form-group">
         <label for="gcsV">V:</label>
         <input type="number" id="gcsV"
           min="1" max="5" placeholder="1-5"
           oninput="calculateGCSTotal()">
       </div>
 
-      <div class="form-group">
+<div class="form-group">
         <label for="gcsM">M:</label>
         <input type="number" id="gcsM"
           min="1" max="6" placeholder="1-6"
           oninput="calculateGCSTotal()">
       </div>
 
-      <div class="form-group">
+<div class="form-group">
         <label for="gcsTotal">Total: /15</label>
         <input type="number" id="gcsTotal"
           min="3" max="15" placeholder="/15">
@@ -1077,7 +1075,7 @@ textarea {
     </div>
   </div>
 
-  <!-- PAIN SCORE -->
+<!-- PAIN SCORE -->
   <div class="form-group" style="margin-top: 14px;">
     <label for="painScore">Pain Score: /10</label>
     <input type="number" id="painScore"
@@ -1085,7 +1083,75 @@ textarea {
   </div>
 
 </div>
-   
+
+<!-- BAHAGIAN 6: PHYSICAL EXAMINATION -->
+<div class="card">
+
+<div class="card-header">
+    <h2 class="card-title">
+      PHYSICAL EXAMINATION (GENERAL CONDITION)
+    </h2>
+  </div>
+
+<div class="pe-grid">
+
+<div class="pe-item form-group">
+      <label for="peHead">Head -</label>
+      <textarea id="peHead"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="peNeck">Neck -</label>
+      <textarea id="peNeck"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="peChest">Chest -</label>
+      <textarea id="peChest"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="peAbdomen">Abdomen -</label>
+      <textarea id="peAbdomen"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="pePelvis">Pelvis -</label>
+      <textarea id="pePelvis"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="pePerineal">Perineal/Genitalia -</label>
+      <textarea id="pePerineal"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="peBack">Back -</label>
+      <textarea id="peBack"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="peUpperRt">Upper Limb (RT) -</label>
+      <textarea id="peUpperRt"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="peUpperLt">Upper Limb (LT) -</label>
+      <textarea id="peUpperLt"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="peLowerRt">Lower Limb (RT) -</label>
+      <textarea id="peLowerRt"></textarea>
+    </div>
+
+<div class="pe-item form-group">
+      <label for="peLowerLt">Lower Limb (LT) -</label>
+      <textarea id="peLowerLt"></textarea>
+    </div>
+
+</div>
+</div>
 
 <!-- BAHAGIAN 7: AT HOSPITAL - ZONE - -->
         <div class="card">
@@ -1240,7 +1306,28 @@ const auth = getAuth(firebaseApp);
 
 const recordsCollection = collection(db, "ambulance_records");
 
-await signInAnonymously(auth);
+let firebaseAuthReady = false;
+let firebaseAuthError = null;
+
+try {
+  if (!auth.currentUser) {
+    await signInAnonymously(auth);
+  }
+
+  firebaseAuthReady = !!auth.currentUser;
+
+  if (firebaseAuthReady) {
+    console.log("Firebase Authentication berjaya.");
+  }
+
+} catch (error) {
+  firebaseAuthError = error;
+
+  console.error(
+    "Firebase Authentication gagal:",
+    error
+  );
+}
 
 (function () {
   'use strict';
@@ -1256,25 +1343,58 @@ await signInAnonymously(auth);
   ensureInitialCrewField();
   startRealtimeSync();
 }
-      function startRealtimeSync() {
-  onSnapshot(recordsCollection, (snapshot) => {
+      
+function startRealtimeSync() {
 
-    records = snapshot.docs.map(item => ({
-      ...item.data(),
-      id: item.id
-    }));
+  console.log("================================");
+  console.log("FIREBASE REALTIME SYNC START");
+  console.log("Project:", firebaseConfig.projectId);
+  console.log("Collection:", "ambulance_records");
+  console.log("================================");
 
-    records.sort((a, b) =>
-      (b.tarikh || '').localeCompare(a.tarikh || '')
-    );
+  if (!firebaseAuthReady || !auth.currentUser) {
+    console.error("Firebase Authentication belum tersedia.");
+    showToast("Firebase Authentication belum berjaya.");
+    return;
+  }
 
-    updateDashboard();
-    renderRecordsList();
+  onSnapshot(
+    recordsCollection,
 
-  }, (error) => {
-    console.error(error);
-    showToast('Gagal mendapatkan rekod Firebase.');
-  });
+    (snapshot) => {
+
+      console.log("FIREBASE READ SUCCESS");
+      console.log("Jumlah dokumen:", snapshot.size);
+
+      records = snapshot.docs.map(item => ({
+        ...item.data(),
+        id: item.id
+      }));
+
+      records.sort((a, b) =>
+        (b.tarikh || '').localeCompare(a.tarikh || '')
+      );
+
+      updateDashboard();
+      renderRecordsList();
+
+      console.log("Dashboard dikemaskini.");
+      console.log("Saved Records dikemaskini.");
+
+    },
+
+    (error) => {
+
+      console.error("FIREBASE READ ERROR:", error.code);
+      console.error("DETAIL:", error.message);
+
+      showToast(
+        "Firebase Read Error: " +
+        (error.code || error.message)
+      );
+
+    }
+  );
 }
       function setDefaultDate() {
         const dateInput = document.getElementById('tarikh');
@@ -1313,10 +1433,25 @@ await signInAnonymously(auth);
       };
 
       window.openNewRecordForm = function () {
-        resetFormToNew();
-        switchView('viewForm');
-      };
 
+  const form = document.getElementById('ambulanceForm');
+
+  if (!form) {
+    console.error("Borang ambulanceForm tidak dijumpai.");
+    showToast("Ralat: Borang rekod tidak dijumpai.");
+    return;
+  }
+
+  resetFormToNew();
+
+  switchView('viewForm');
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
+};
       window.resetFormToNew = function () {
         const form = document.getElementById('ambulanceForm');
         form.reset();
@@ -1459,33 +1594,62 @@ pulseRepeat: document.getElementById('pulseRepeat').value.trim(),
           zone: document.getElementById('zone').value
         };
 
-        if (editId) {
-          const index = records.findIndex(r => r.id === editId);
-          if (index !== -1) {
-            records[index] = recordData;
-            showToast('Rekod berjaya dikemaskini.');
-          }
-        } else {
-          records.unshift(recordData);
-          showToast('Rekod baharu berjaya disimpan.');
-        }
+const btn = document.getElementById('btnSaveRecord');
 
-        try {
+try {
+
+  if (firebaseAuthError) {
+    throw firebaseAuthError;
+  }
+
+  if (!firebaseAuthReady || !auth.currentUser) {
+    throw new Error("Firebase Authentication belum berjaya.");
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Sedang Menyimpan...";
+
+  console.log("SAVE START:", recordData.id);
+
   await setDoc(
     doc(db, "ambulance_records", recordData.id),
     recordData
   );
 
-  showToast('Rekod berjaya disimpan ke Firebase.');
+  console.log("SAVE SUCCESS:", recordData.id);
+
+  showToast(
+    editId
+      ? "Rekod berjaya dikemaskini ke Firebase."
+      : "Rekod baharu berjaya disimpan ke Firebase."
+  );
 
   resetFormToNew();
+
   switchView('viewRecords');
 
 } catch (error) {
-  console.error('Firebase error:', error);
-  showToast('Gagal simpan: ' + error.message);
+
+  console.error("FIREBASE SAVE ERROR");
+  console.error("CODE:", error.code);
+  console.error("MESSAGE:", error.message);
+
+  showToast(
+    "Gagal menyimpan: " +
+    (error.code || error.message)
+  );
+
+} finally {
+
+  btn.disabled = false;
+
+  btn.textContent =
+    document.getElementById('editRecordId').value
+      ? "Simpan Perubahan"
+      : "Save Record";
+
 }
-      };
+    };
 
       window.editRecord = function (id) {
         const rec = records.find(r => r.id === id);
@@ -1699,39 +1863,61 @@ const spo2RepeatText = pc.spo2Repeat || '';
         printArea.style.display = 'none';
       };
 
-      window.promptDeleteRecord = function (id) {
-        const rec = records.find(r => r.id === id);
-        if (!rec) return;
+window.promptDeleteRecord = function (id) {
 
-        pendingDeleteId = id;
-        document.getElementById('deleteTargetInfo').textContent =
-          `CALL CARD NO: ${rec.callCardNo || '-'} | Mangsa/pesakit: ${rec.mangsaPesakit || '-'} (${rec.tarikh || '-'})`;
+  const rec = records.find(r => r.id === id);
+  if (!rec) return;
 
-        document.getElementById('confirmDeleteBtn').onclick = function () {
-          if (pendingDeleteId) {
-            const idToDelete = pendingDeleteId;
+  pendingDeleteId = id;
 
-deleteDoc(
-  doc(db, "ambulance_records", idToDelete)
-)
-.then(() => {
-  showToast('Rekod berjaya dipadam dari Firebase.');
-  pendingDeleteId = null;
-  closeModal('deleteModal');
-})
-.catch(error => {
-  console.error(error);
-  showToast('Gagal memadam rekod: ' + error.message);
-});      
-      pendingDeleteId = null;
-            closeModal('deleteModal');
-            showToast('Rekod telah dipadam.');
-          }
-        };
+  document.getElementById('deleteTargetInfo').textContent =
+    `CALL CARD NO: ${rec.callCardNo || '-'} | Mangsa/pesakit: ${rec.mangsaPesakit || '-'} (${rec.tarikh || '-'})`;
 
-        openModal('deleteModal');
-      };
+  document.getElementById('confirmDeleteBtn').onclick =
+    async function () {
 
+      if (!pendingDeleteId) return;
+
+      const idToDelete = pendingDeleteId;
+      const btn = document.getElementById('confirmDeleteBtn');
+
+      try {
+
+        btn.disabled = true;
+        btn.textContent = "Memadam...";
+
+        await deleteDoc(
+          doc(db, "ambulance_records", idToDelete)
+        );
+
+        pendingDeleteId = null;
+
+        closeModal('deleteModal');
+
+        showToast(
+          "Rekod berjaya dipadam dari Firebase."
+        );
+
+      } catch (error) {
+
+        console.error("DELETE ERROR:", error);
+
+        showToast(
+          "Gagal memadam: " +
+          (error.code || error.message)
+        );
+
+      } finally {
+
+        btn.disabled = false;
+        btn.textContent = "Confirm Delete";
+
+      }
+
+    };
+
+  openModal('deleteModal');
+};
       window.openModal = function (modalId) {
         const modal = document.getElementById(modalId);
         if (modal) modal.classList.add('active');
@@ -1934,7 +2120,21 @@ deleteDoc(
       }
 
       // Mulakan aplikasi apabila DOM sedia
-      document.addEventListener('DOMContentLoaded', initApp);
+      
+if (document.readyState === 'loading') {
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    initApp,
+    { once: true }
+  );
+
+} else {
+
+  initApp();
+
+}
+
     })();
 
 
@@ -1951,3 +2151,5 @@ if ("serviceWorker" in navigator) {
 </script>
 </body>
 </html>
+
+
