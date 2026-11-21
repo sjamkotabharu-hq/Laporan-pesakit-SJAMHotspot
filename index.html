@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
+<link rel="manifest" href="./manifest.json">
+
+<meta name="theme-color" content="#E3EFF7">
+
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SJAM AMBULANS HOTSPOT 999 - Sistem Rekod Digital</title> 
@@ -1900,6 +1905,16 @@ deleteDoc(
     })();
 
 
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.error(
+        "Service Worker Error:", error
+      ));
+  });
+}
 </script>
 </body>
 </html>
