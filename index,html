@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SJAM AMBULANS HOTSPOT 999 - Sistem Rekod Digital</title> 
+ <style>
+    /* ==========================================================================
+       DESIGN TOKENS & PALET WARNA LEMBUT PROFESIONAL
+       ========================================================================== */
+    :root {
+      --bg-main: #F8F9FA;           /* Off-white */
+      --bg-card: #FFFFFF;           /* Putih bersih */
+      --bg-subtle: #F2F4F7;         /* Light grey */
+      --bg-beige: #F5F2EB;          /* Soft beige */
+      --pastel-blue: #E3EFF7;       /* Soft pastel blue */
+      --pastel-blue-border: #BBD6E8;
+      --muted-blue: #4A7C9B;        /* Muted blue */
+      --muted-blue-dark: #355C75;
+      --sage-green: #E4EFE9;        /* Soft sage green */
+      --sage-green-accent: #5C8D76; /* Sage green accent */
+      --sage-green-dark: #436B58;
+      --text-primary: #1E293B;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --border-color: #CBD5E1;
+      --danger-soft: #F8E8E8;
+      --danger-accent: #B85454;
+      --warning-soft: #FDF6E7;
+      --warning-border: #E6C88A;
+      --shadow-sm: 0 2px 6px rgba(30, 41, 59, 0.05);
+      --shadow-md: 0 6px 16px rgba(30, 41, 59, 0.08);
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-sm: 8px;
+    }
+
+/* ==========================================================================
+       RESET & ASAS TIPOGRAFI
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+/* ==========================================================================
+       HEADER RASMI APLIKASI
+       ========================================================================== */
+    .app-header {
+      background: linear-gradient(135deg, var(--pastel-blue) 0%, var(--sage-green) 100%);
+      border-bottom: 1px solid var(--pastel-blue-border);
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+.header-arabic {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--muted-blue-dark);
+      margin-bottom: 4px;
+      letter-spacing: 0.3px;
+    }
+
+.header-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 8px 0 4px;
+      letter-spacing: 0.5px;
+    }
+
+.header-slogan {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--sage-green-dark);
+      background-color: rgba(255, 255, 255, 0.7);
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-top: 4px;
+      border: 1px solid rgba(92, 141, 118, 0.25);
+    }
+
+/* ==========================================================================
+       NAVIGASI UTAMA (MOBILE-FIRST)
+       ========================================================================== */
+    .main-nav {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 8px 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+.nav-container {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+.nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 8px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-subtle);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+.nav-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+.nav-btn.active {
+      background-color: var(--muted-blue);
+      color: #FFFFFF;
+      box-shadow: var(--shadow-sm);
+    }
+
+.nav-btn:hover:not(.active) {
+      background-color: var(--pastel-blue);
+      color: var(--muted-blue-dark);
+    }
+
+/* ==========================================================================
+       KONTAINER UTAMA & PAPARAN (VIEWS)
+       ========================================================================== */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px;
+      padding-bottom: 60px;
+    }
+
+.view-section {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+.view-section.active {
+      display: block;
+    }
+
+@keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+/* ==========================================================================
+       KAD & KOMPONEN UI
+       ========================================================================== */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+.card-header {
+      border-bottom: 1px solid var(--bg-subtle);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+.card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--muted-blue-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.badge {
+      background-color: var(--sage-green);
+      color: var(--sage-green-dark);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+/* ==========================================================================
+       DASHBOARD & AMARAN PRIVASI
+       ========================================================================== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+.stat-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--pastel-blue-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+.stat-box.sage {
+      background-color: var(--sage-green);
+      border-color: rgba(92, 141, 118, 0.3);
+    }
+
+.stat-box.blue {
+      background-color: var(--pastel-blue);
+      border-color: var(--pastel-blue-border);
+    }
+
+.stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+.stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+.privacy-notice {
+      background-color: var(--warning-soft);
+      border: 1px solid var(--warning-border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: #5C481E;
+    }
+
+.privacy-notice strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #423212;
+    }
+
+.privacy-notice ul {
+      margin-left: 18px;
+      margin-top: 6px;
+    }
+
+.privacy-notice li {
+      margin-bottom: 4px;
+    }
+
+/* ==========================================================================
+       ELEMEN BORANG (MOBILE-FIRST INPUTS)
+       ========================================================================== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+.form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text-primary);
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    }
+
+input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      background-color: #FFFFFF;
+      border-color: var(--muted-blue);
+      box-shadow: 0 0 0 3px rgba(74, 124, 155, 0.15);
+    }
+
+textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+/* Timer Response Grid */
+    .timer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+.timer-item {
+      background-color: var(--bg-subtle);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid #E2E8F0;
+    }
+
+/* Dynamic Crew List */
+    .crew-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+.crew-row input {
+      flex: 1;
+    }
+
+/* Vital Signs & GCS Sub-boxes */
+    .sub-panel {
+      background-color: var(--bg-beige);
+      border: 1px solid #E2DDD2;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-top: 8px;
+    }
+
+.sub-panel-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+.gcs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+.bp-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.bp-wrapper span {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+    }
+
+/* Physical Examination Grid */
+    .pe-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+.pe-item {
+      background-color: var(--bg-subtle);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid #E2E8F0;
+    }
+
+.pe-item textarea {
+      background-color: #FFFFFF;
+      min-height: 68px;
+      margin-top: 6px;
+    }
+
+/* ==========================================================================
+       BUTANG TINDAKAN
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      min-height: 46px;
+    }
+
+.btn-block {
+      width: 100%;
+    }
+
+.btn-primary {
+      background-color: var(--muted-blue);
+      color: #FFFFFF;
+    }
+
+.btn-primary:hover {
+      background-color: var(--muted-blue-dark);
+    }
+
+.btn-sage {
+      background-color: var(--sage-green-accent);
+      color: #FFFFFF;
+    }
+
+.btn-sage:hover {
+      background-color: var(--sage-green-dark);
+    }
+
+.btn-whatsapp {
+      background-color: #2E7D5B;
+      color: #FFFFFF;
+    }
+
+.btn-whatsapp:hover {
+      background-color: #236146;
+    }
+
+.btn-secondary {
+      background-color: var(--bg-subtle);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+.btn-secondary:hover {
+      background-color: #E2E8F0;
+    }
+
+.btn-danger {
+      background-color: var(--danger-soft);
+      color: var(--danger-accent);
+      border: 1px solid #E5C2C2;
+    }
+
+.btn-danger:hover {
+      background-color: var(--danger-accent);
+      color: #FFFFFF;
+    }
+
+.btn-sm {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      min-height: 38px;
+    }
+
+.action-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+/* ==========================================================================
+       SENARAI REKOD & CARIAN
+       ========================================================================== */
+    .search-box {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+.search-box input {
+      padding-left: 42px;
+      background-color: #FFFFFF;
+      border: 1px solid var(--muted-blue-border, var(--border-color));
+    }
+
+.search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 18px;
+      height: 18px;
+    }
+
+.record-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-left: 5px solid var(--muted-blue);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease;
+    }
+
+.record-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+.record-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+.record-callcard {
+      background-color: var(--pastel-blue);
+      color: var(--muted-blue-dark);
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+.record-patient {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+.record-complaint {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      background-color: var(--bg-subtle);
+      padding: 8px 10px;
+      border-radius: 6px;
+    }
+
+.record-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+.empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--text-muted);
+      background-color: var(--bg-card);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border-color);
+    }
+
+/* ==========================================================================
+       MODAL PAPARAN PENUH, PENGESAHAN PADAM & NOTIFIKASI TOAST
+       ========================================================================== */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.55);
+      z-index: 200;
+      padding: 14px;
+      overflow-y: auto;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+.modal-backdrop.active {
+      display: flex;
+    }
+
+.modal-content {
+      background-color: var(--bg-card);
+      width: 100%;
+      max-width: 720px;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin: 20px auto;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+.modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+.modal-close {
+      background: var(--bg-subtle);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+.detail-preview-box {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: var(--text-primary);
+      max-height: 55vh;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+
+.toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background-color: var(--text-primary);
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      z-index: 300;
+      opacity: 0;
+      transition: all 0.3s ease;
+      text-align: center;
+      max-width: 90%;
+    }
+
+.toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+/* ==========================================================================
+       MEDIA QUERIES (TABLET & DESKTOP)
+       ========================================================================== */
+    @media (min-width: 640px) {
+      .form-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+.timer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+.gcs-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+.pe-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+.record-actions {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+.action-bar {
+        flex-direction: row;
+      }
+
+.nav-btn {
+        flex-direction: row;
+        font-size: 0.95rem;
+        padding: 12px 16px;
+      }
+    }
+
+@media (min-width: 768px) {
+      .timer-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+/* ==========================================================================
+       PRINT STYLESHEET (CETAKAN REKOD RASMI)
+       ========================================================================== */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 12px;
+        background: #FFFFFF;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+        white-space: pre-wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========================================================================
+       HEADER APLIKASI DENGAN TEKS RASMI YANG DIKEKALKAN SEPENUHNYA
+       ======================================================================== -->
+  <header class="app-header">
+    <div class="header-arabic">بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْمِ</div>
+    <div class="header-arabic">السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</div>
+    <h1 class="header-title">SJAM AMBULANS HOTSPOT 999</h1>  
+  <div class="header-slogan">BERHEMAH,MESRA PESAKIT,CEKAP .</div>
+  </header>
+
+<!-- ========================================================================
+       NAVIGASI UTAMA
+       ======================================================================== -->
+  <nav class="main-nav" aria-label="Navigasi Utama">
+    <div class="nav-container">
+      <button type="button" class="nav-btn active" data-target="viewDashboard" onclick="switchView('viewDashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span>Dashboard</span>
+      </button>
+      <button type="button" class="nav-btn" data-target="viewForm" onclick="openNewRecordForm()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="16"></line>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+        <span>Add New Record</span>
+      </button>
+      <button type="button" class="nav-btn" data-target="viewRecords" onclick="switchView('viewRecords')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+        </svg>
+        <span>Saved Records</span>
+      </button>
+    </div>
+  </nav>
+
+<main class="container">
+
+<!-- ======================================================================
+         PAPARAN 1: DASHBOARD & PENGURUSAN SANDARAN
+         ====================================================================== -->
+    <section id="viewDashboard" class="view-section active">
+      <div class="stats-grid">
+        <div class="stat-box blue">
+          <div class="stat-number" id="statTotalRecords">0</div>
+          <div class="stat-label">Jumlah Rekod Disimpan</div>
+        </div>
+        <div class="stat-box sage">
+          <div class="stat-number" id="statTodayRecords">0</div>
+          <div class="stat-label">Rekod Hari Ini</div>
+        </div>
+      </div>
+
+<div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Tindakan Pantas</h2>
+        </div>
+        <div class="action-bar" style="margin-top: 0;">
+          <button type="button" class="btn btn-primary btn-block" onclick="openNewRecordForm()">
+            + Cipta Rekod Kes Baharu
+          </button>
+          <button type="button" class="btn btn-sage btn-block" onclick="switchView('viewRecords')">
+            Lihat & Cari Rekod Disimpan
+          </button>
+        </div>
+      </div>
+
+<!-- Peringatan Keselamatan & Privasi Data -->
+      <div class="privacy-notice">
+        <strong>PERINGATAN KESELAMATAN & PRIVASI MAKLUMAT PESAKIT</strong>
+        <ul>
+          <li>Aplikasi ini menyimpan data pesakit secara setempat di dalam <strong>localStorage</strong> pelayar (browser) peranti ini sahaja.</li>
+          <li><strong>Nota Penting:</strong> <em>localStorage</em> bukan sistem simpanan awan (<em>cloud backup</em>) dan tidak menyegerakkan rekod secara automatik antara telefon atau peranti lain.</li>
+          <li>Data pesakit adalah SULIT. Dilarang berkongsi maklumat pesakit kepada pihak yang tidak dibenarkan.</li>
+          <li>Sila buat salinan sandaran (<em>Export Backup</em>) secara berkala untuk mengelakkan kehilangan data jika cache pelayar dipadam.</li>
+        </ul>
+      </div>
+
+<!-- Fungsi Sandaran JSON -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Pengurusan Sandaran Data (JSON)</h2>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 14px;">
+          Muat turun semua rekod ke dalam fail JSON untuk simpanan selamat atau pulihkan rekod daripada fail sandaran sedia ada.
+        </p>
+        <div class="action-bar" style="margin-top: 0;">
+          <button type="button" class="btn btn-secondary btn-block" onclick="exportBackupJSON()">
+            Export Backup (JSON)
+          </button>
+          <button type="button" class="btn btn-secondary btn-block" onclick="triggerImportJSON()">
+            Import Backup (JSON)
+          </button>
+          <input type="file" id="importFileInput" accept=".json,application/json" style="display: none;" onchange="handleImportJSON(event)">
+        </div>
+      </div>
+
+<!-- Rekod Terkini di Dashboard -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Rekod Terkini</h2>
+          <span class="badge" id="recentBadge">0 Rekod</span>
+        </div>
+        <div id="dashboardRecentList"></div>
+      </div>
+    </section>
+
+<!-- ======================================================================
+         PAPARAN 2: BORANG REKOD AMBULANS (ADD / EDIT RECORD)
+         ====================================================================== -->
+    <section id="viewForm" class="view-section">
+      <form id="ambulanceForm" onsubmit="saveRecord(event)">
+        <input type="hidden" id="editRecordId" value="">
+
+<div class="card">
+          <div class="card-header">
+            <h2 class="card-title" id="formModeTitle">Rekod Kes Ambulans Baharu</h2>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="resetFormToNew()">Kosongkan Borang</button>
+          </div>
+
+<!-- BAHAGIAN 1: MAKLUMAT PANGGILAN -->
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="tarikh">TARIKH:</label>
+              <input type="date" id="tarikh" required>
+            </div>
+            <div class="form-group">
+              <label for="callCardNo">CALL CARD NO:</label>
+              <input type="text" id="callCardNo" placeholder="Masukkan Call Card No" required>
+            </div>
+          </div>
+
+<div class="form-group" style="margin-top: 14px;">
+            <label for="informFromMecc">INFORM FROM MECC:</label>
+            <textarea id="informFromMecc" placeholder="Masukkan maklumat daripada MECC"></textarea>
+          </div>
+        </div>
+
+<!-- BAHAGIAN 2: TIMER RESPONSE CASE -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">TIMER RESPONSE CASE</h2>
+          </div>
+          <div class="timer-grid">
+            <div class="timer-item form-group">
+              <label for="timeActivation">Activation:</label>
+              <input type="time" id="timeActivation" step="1">
+            </div>
+            <div class="timer-item form-group">
+              <label for="timeRolling">Rolling</label>
+              <input type="time" id="timeRolling" step="1">
+            </div>
+            <div class="timer-item form-group">
+              <label for="timeAtScene">At Scene</label>
+              <input type="time" id="timeAtScene" step="1">
+            </div>
+            <div class="timer-item form-group">
+              <label for="timeTransporting">Transporting</label>
+              <input type="time" id="timeTransporting" step="1">
+            </div>
+            <div class="timer-item form-group">
+              <label for="timeAtHospital">At Hospital:</label>
+              <input type="time" id="timeAtHospital" step="1">
+            </div>
+            <div class="timer-item form-group">
+              <label for="timeClearCase">Clear Case</label>
+              <input type="time" id="timeClearCase" step="1">
+            </div>
+            <div class="timer-item form-group">
+              <label for="timeReadyToMecc">Ready To Mecc</label>
+              <input type="time" id="timeReadyToMecc" step="1">
+            </div>
+          </div>
+        </div>
+
+<!-- BAHAGIAN 3: AMBULANCE CREW NAME -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">AMBULANCE CREW NAME:</h2>
+            <button type="button" class="btn btn-sage btn-sm" onclick="addCrewInput()">+ Tambah Anggota</button>
+          </div>
+          <div id="crewContainer"></div>
+        </div>
+
+<!-- BAHAGIAN 4: MAKLUMAT LOKASI & MANGSA/PESAKIT -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Maklumat Lokasi & Pesakit</h2>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="tempat">Tempat</label>
+              <textarea id="tempat" placeholder="Lokasi kejadian / alamat"></textarea>
+            </div>
+            <div class="form-grid form-grid-2">
+              <div class="form-group">
+                <label for="mangsaPesakit">Mangsa/pesakit</label>
+                <input type="text" id="mangsaPesakit" placeholder="Nama penuh / pengenalan pesakit" required>
+              </div>
+              <div class="form-group">
+                <label for="umur">Umur</label>
+                <input type="text" id="umur" placeholder="Contoh: 35 tahun / 8 bulan">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cederaDiMana">Cedera Di Mana (CHIEF COMPLAINT)</label>
+              <textarea id="cederaDiMana" placeholder="Nyatakan aduan utama atau kecederaan pesakit"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="catatan">CATATAN</label>
+              <textarea id="catatan" placeholder="Catatan tambahan kes / mekanisme kecederaan"></textarea>
+            </div>
+          </div>
+        </div>
+
+<!-- BAHAGIAN 5: PATIENT CARE -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">PATIENT CARE</h2>
+          </div>
+
+<div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="spo2">Spo² (%)</label>
+              <input type="number" id="spo2" min="0" max="100" placeholder="Contoh: 98">
+            </div>
+
+<div class="form-group">
+              <label>Bp (mmHg)</label>
+              <div class="bp-wrapper">
+                <input type="number" id="bpSys" min="0" max="350" placeholder="Systolic">
+                <span>/</span>
+                <input type="number" id="bpDia" min="0" max="250" placeholder="Diastolic">
+              </div>
+            </div>
+
+<div class="form-group">
+              <label for="pulse">Pulse (bpm)</label>
+              <input type="number" id="pulse" min="0" max="300" placeholder="Contoh: 84">
+            </div>
+
+<div class="form-group">
+              <label for="rrMn">RR/MN</label>
+              <input type="number" id="rrMn" min="0" max="100" placeholder="Contoh: 18">
+            </div>
+
+<div class="form-group">
+              <label for="consciousLevel">Conscious Level</label>
+              <select id="consciousLevel">
+                <option value="">-- Pilih Tahap Kesedaran --</option>
+                <option value="Alert">Alert</option>
+                <option value="Verbal">Verbal</option>
+                <option value="Pain">Pain</option>
+                <option value="Unresponsive">Unresponsive</option>
+              </select>
+            </div>
+
+<div class="form-group">
+              <label for="glucoseMeter">GLUCOSE METER: (mmol/L)</label>
+              <input type="number" id="glucoseMeter" step="0.1" min="0" max="50" placeholder="Contoh: 5.6">
+            </div>
+          </div>
+
+<!-- GCS Sub-panel -->
+          <div class="sub-panel">
+            <div class="sub-panel-title">GCS</div>
+            <div class="gcs-grid">
+              <div class="form-group">
+                <label for="gcsE">E:</label>
+                <input type="number" id="gcsE" min="1" max="4" placeholder="1-4" oninput="calculateGCSTotal()">
+              </div>
+              <div class="form-group">
+                <label for="gcsV">V:</label>
+                <input type="number" id="gcsV" min="1" max="5" placeholder="1-5" oninput="calculateGCSTotal()">
+              </div>
+              <div class="form-group">
+                <label for="gcsM">M:</label>
+                <input type="number" id="gcsM" min="1" max="6" placeholder="1-6" oninput="calculateGCSTotal()">
+              </div>
+              <div class="form-group">
+                <label for="gcsTotal">Total: /15</label>
+                <input type="number" id="gcsTotal" min="3" max="15" placeholder="/15">
+              </div>
+            </div>
+          </div>
+
+<div class="form-group" style="margin-top: 14px;">
+            <label for="painScore">Pain Score: /10</label>
+            <input type="number" id="painScore" min="0" max="10" placeholder="0 - 10">
+          </div>
+        </div>
+
+<!-- BAHAGIAN 6: PHYSICAL EXAMANITION (GENERAL CONDITION) -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">PHYSICAL EXAMANITION (GENERAL CONDITION)</h2>
+          </div>
+
+<div class="pe-grid">
+            <div class="pe-item form-group">
+              <label for="peHead">Head-</label>
+              <textarea id="peHead" placeholder="Catatan pemeriksaan Head"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="peNeck">Neck-</label>
+              <textarea id="peNeck" placeholder="Catatan pemeriksaan Neck"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="peChest">Chest-</label>
+              <textarea id="peChest" placeholder="Catatan pemeriksaan Chest"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="peAbdomen">Abdomen -</label>
+              <textarea id="peAbdomen" placeholder="Catatan pemeriksaan Abdomen"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="pePelvis">Pelvis-</label>
+              <textarea id="pePelvis" placeholder="Catatan pemeriksaan Pelvis"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="pePerineal">Perineal/Genitalia-</label>
+              <textarea id="pePerineal" placeholder="Catatan pemeriksaan Perineal/Genitalia"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="peBack">Back -</label>
+              <textarea id="peBack" placeholder="Catatan pemeriksaan Back"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="peUpperRt">Upper limb- (RT)</label>
+              <textarea id="peUpperRt" placeholder="Catatan pemeriksaan Upper limb (RT)"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="peUpperLt">Upper limb- (LT)</label>
+              <textarea id="peUpperLt" placeholder="Catatan pemeriksaan Upper limb (LT)"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="peLowerRt">Lower limb- (RT)</label>
+              <textarea id="peLowerRt" placeholder="Catatan pemeriksaan Lower limb (RT)"></textarea>
+            </div>
+            <div class="pe-item form-group">
+              <label for="peLowerLt">Lower limb- (LT)</label>
+              <textarea id="peLowerLt" placeholder="Catatan pemeriksaan Lower limb (LT)"></textarea>
+            </div>
+          </div>
+        </div>
+
+<!-- BAHAGIAN 7: AT HOSPITAL - ZONE - -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Destinasi Penerimaan Hospital</h2>
+          </div>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="atHospital">AT HOSPITAL -</label>
+              <input type="text" id="atHospital" placeholder="Nama Hospital">
+            </div>
+            <div class="form-group">
+              <label for="zone">ZONE -</label>
+              <select id="zone">
+                <option value="">-- Pilih Zon --</option>
+                <option value="RED ZONE">RED ZONE</option>
+                <option value="YELLOW ZONE">YELLOW ZONE</option>
+                <option value="GREEN ZONE">GREEN ZONE</option>
+                <option value="CCARS / ISOLATION">CCARS / ISOLATION</option>
+                <option value="LAIN-LAIN">LAIN-LAIN</option>
+              </select>
+            </div>
+          </div>
+
+<div class="action-bar">
+            <button type="submit" class="btn btn-primary btn-block" id="btnSaveRecord">
+              Save Record
+            </button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="switchView('viewRecords')">
+              Batal
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+<!-- ======================================================================
+         PAPARAN 3: SAVED RECORDS & SEARCH RECORD
+         ====================================================================== -->
+    <section id="viewRecords" class="view-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Saved Records & Search Record</h2>
+          <span class="badge" id="totalSavedBadge">0 Rekod</span>
+        </div>
+
+<div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Cari CALL CARD NO, TARIKH (YYYY-MM-DD) atau Mangsa/pesakit..." oninput="renderRecordsList()">
+        </div>
+
+<div id="recordsListContainer"></div>
+      </div>
+    </section>
+
+</main>
+
+<!-- ========================================================================
+       MODAL: VIEW RECORD & WHATSAPP SHARING / PRINT
+       ======================================================================== -->
+  <div id="viewModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="viewModalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="card-title" id="viewModalTitle">Paparan Penuh Rekod Ambulans</h3>
+        <button type="button" class="modal-close" onclick="closeModal('viewModal')" aria-label="Tutup">×</button>
+      </div>
+
+<div id="recordFormattedText" class="detail-preview-box"></div>
+
+<div class="action-bar" style="margin-top: 0;">
+        <button type="button" class="btn btn-whatsapp btn-block" id="modalWhatsappBtn">
+          SHARE TO WHATSAPP
+        </button>
+        <button type="button" class="btn btn-secondary btn-block" id="modalPrintBtn">
+          Print Record
+        </button>
+        <button type="button" class="btn btn-primary btn-block" id="modalEditBtn">
+          Edit Record
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!-- ========================================================================
+       MODAL: PENGESAHAN DELETE RECORD
+       ======================================================================== -->
+  <div id="deleteModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+    <div class="modal-content" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="card-title" id="deleteModalTitle" style="color: var(--danger-accent);">Pengesahan Padam Rekod</h3>
+        <button type="button" class="modal-close" onclick="closeModal('deleteModal')" aria-label="Tutup">×</button>
+      </div>
+      <p style="margin-bottom: 10px; color: var(--text-primary);">
+        Adakah anda pasti ingin memadam rekod pesakit ini secara kekal daripada peranti ini?
+      </p>
+      <div id="deleteTargetInfo" style="background: var(--danger-soft); padding: 10px; border-radius: 8px; margin-bottom: 16px; font-weight: 600; font-size: 0.9rem; color: var(--danger-accent);"></div>
+      <div class="action-bar" style="margin-top: 0;">
+        <button type="button" class="btn btn-secondary btn-block" onclick="closeModal('deleteModal')">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger btn-block" id="confirmDeleteBtn">
+          Confirm Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!-- Kawasan Khas untuk Cetakan -->
+  <div id="printArea" style="display: none;"></div>
+
+<!-- Toast Notification -->
+  <div id="toastNotification" class="toast"></div>
+
+<!-- ========================================================================
+       VANILLA JAVASCRIPT LOGIC
+       ======================================================================== -->
+  <script type="module">
+
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  deleteDoc,
+  onSnapshot,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+
+import {
+  getAuth,
+  signInAnonymously
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA6iZzF3Jzk521jYnjqqSL7jjPGkbK2Cwo",
+  authDomain: "laporan-pesakit-sjamhotspot.firebaseapp.com",
+  projectId: "laporan-pesakit-sjamhotspot",
+  storageBucket: "laporan-pesakit-sjamhotspot.firebasestorage.app",
+  messagingSenderId: "458311670360",
+  appId: "1:458311670360:web:288e21633f5fcce190882d"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
+
+const recordsCollection = collection(db, "ambulance_records");
+
+await signInAnonymously(auth);
+
+(function () {
+  'use strict';
+      const STORAGE_KEY = 'ambulans_hotspot_999_records_v1';
+      let records = [];
+      let pendingDeleteId = null;
+
+      /* ----------------------------------------------------------------------
+         1. INISIALISASI APLIKASI
+         ---------------------------------------------------------------------- */
+      function initApp() {
+  setDefaultDate();
+  ensureInitialCrewField();
+  startRealtimeSync();
+}
+      function startRealtimeSync() {
+  onSnapshot(recordsCollection, (snapshot) => {
+
+    records = snapshot.docs.map(item => ({
+      ...item.data(),
+      id: item.id
+    }));
+
+    records.sort((a, b) =>
+      (b.tarikh || '').localeCompare(a.tarikh || '')
+    );
+
+    updateDashboard();
+    renderRecordsList();
+
+  }, (error) => {
+    console.error(error);
+    showToast('Gagal mendapatkan rekod Firebase.');
+  });
+}
+      function setDefaultDate() {
+        const dateInput = document.getElementById('tarikh');
+        if (dateInput && !dateInput.value) {
+          const today = new Date();
+          const yyyy = today.getFullYear();
+          const mm = String(today.getMonth() + 1).padStart(2, '0');
+          const dd = String(today.getDate()).padStart(2, '0');
+          dateInput.value = `${yyyy}-${mm}-${dd}`;
+        }
+      }
+
+      /* ----------------------------------------------------------------------
+         2. NAVIGASI & PAPARAN
+         ---------------------------------------------------------------------- */
+      window.switchView = function (viewId) {
+        document.querySelectorAll('.view-section').forEach(section => {
+          section.classList.remove('active');
+        });
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-target') === viewId);
+        });
+
+        const targetSection = document.getElementById(viewId);
+        if (targetSection) {
+          targetSection.classList.add('active');
+        }
+
+        if (viewId === 'viewDashboard') {
+          updateDashboard();
+        } else if (viewId === 'viewRecords') {
+          renderRecordsList();
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      window.openNewRecordForm = function () {
+        resetFormToNew();
+        switchView('viewForm');
+      };
+
+      window.resetFormToNew = function () {
+        const form = document.getElementById('ambulanceForm');
+        form.reset();
+        document.getElementById('editRecordId').value = '';
+        document.getElementById('formModeTitle').textContent = 'Rekod Kes Ambulans Baharu';
+        document.getElementById('btnSaveRecord').textContent = 'Save Record';
+
+        const crewContainer = document.getElementById('crewContainer');
+        crewContainer.innerHTML = '';
+        addCrewInput('');
+        setDefaultDate();
+      };
+
+      /* ----------------------------------------------------------------------
+         3. PENGURUSAN ANGGOTA AMBULANS (AMBULANCE CREW NAME) & GCS AUTO-SUM
+         ---------------------------------------------------------------------- */
+      function ensureInitialCrewField() {
+        const crewContainer = document.getElementById('crewContainer');
+        if (crewContainer.children.length === 0) {
+          addCrewInput('');
+        }
+      }
+
+      window.addCrewInput = function (value = '') {
+        const crewContainer = document.getElementById('crewContainer');
+        const index = crewContainer.children.length + 1;
+
+        const row = document.createElement('div');
+        row.className = 'crew-row';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'crew-name-input';
+        input.placeholder = `Nama Anggota ${index}`;
+        input.value = value;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'btn btn-danger btn-sm';
+        removeBtn.textContent = 'Padam';
+        removeBtn.setAttribute('aria-label', 'Padam anggota');
+        removeBtn.onclick = function () {
+          if (crewContainer.children.length > 1) {
+            row.remove();
+            updateCrewPlaceholders();
+          } else {
+            input.value = '';
+          }
+        };
+
+        row.appendChild(input);
+        row.appendChild(removeBtn);
+        crewContainer.appendChild(row);
+      };
+
+      function updateCrewPlaceholders() {
+        const inputs = document.querySelectorAll('.crew-name-input');
+        inputs.forEach((inp, idx) => {
+          inp.placeholder = `Nama Anggota ${idx + 1}`;
+        });
+      }
+
+      window.calculateGCSTotal = function () {
+        const eVal = parseInt(document.getElementById('gcsE').value, 10);
+        const vVal = parseInt(document.getElementById('gcsV').value, 10);
+        const mVal = parseInt(document.getElementById('gcsM').value, 10);
+
+        if (!isNaN(eVal) && !isNaN(vVal) && !isNaN(mVal)) {
+          document.getElementById('gcsTotal').value = eVal + vVal + mVal;
+        }
+      };
+
+      /* ----------------------------------------------------------------------
+         4. SIMPAN & KEMASKINI REKOD (ADD / EDIT RECORD)
+         ---------------------------------------------------------------------- */
+      window.saveRecord = async function (event) {     
+   event.preventDefault();
+
+        const editId = document.getElementById('editRecordId').value.trim();
+        const crewInputs = Array.from(document.querySelectorAll('.crew-name-input'))
+          .map(inp => inp.value.trim())
+          .filter(val => val !== '');
+
+        const recordData = {
+          id: editId || ('REC-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase()),
+          updatedAt: new Date().toISOString(),
+          tarikh: document.getElementById('tarikh').value,
+          callCardNo: document.getElementById('callCardNo').value.trim(),
+          informFromMecc: document.getElementById('informFromMecc').value.trim(),
+          timer: {
+            activation: document.getElementById('timeActivation').value,
+            rolling: document.getElementById('timeRolling').value,
+            atScene: document.getElementById('timeAtScene').value,
+            transporting: document.getElementById('timeTransporting').value,
+            atHospital: document.getElementById('timeAtHospital').value,
+            clearCase: document.getElementById('timeClearCase').value,
+            readyToMecc: document.getElementById('timeReadyToMecc').value
+          },
+          crewNames: crewInputs,
+          tempat: document.getElementById('tempat').value.trim(),
+          mangsaPesakit: document.getElementById('mangsaPesakit').value.trim(),
+          umur: document.getElementById('umur').value.trim(),
+          cederaDiMana: document.getElementById('cederaDiMana').value.trim(),
+          catatan: document.getElementById('catatan').value.trim(),
+          patientCare: {
+            spo2: document.getElementById('spo2').value.trim(),
+            bpSys: document.getElementById('bpSys').value.trim(),
+            bpDia: document.getElementById('bpDia').value.trim(),
+            pulse: document.getElementById('pulse').value.trim(),
+            rrMn: document.getElementById('rrMn').value.trim(),
+            consciousLevel: document.getElementById('consciousLevel').value,
+            gcsE: document.getElementById('gcsE').value.trim(),
+            gcsV: document.getElementById('gcsV').value.trim(),
+            gcsM: document.getElementById('gcsM').value.trim(),
+            gcsTotal: document.getElementById('gcsTotal').value.trim(),
+            painScore: document.getElementById('painScore').value.trim(),
+            glucoseMeter: document.getElementById('glucoseMeter').value.trim()
+          },
+          physicalExam: {
+            head: document.getElementById('peHead').value.trim(),
+            neck: document.getElementById('peNeck').value.trim(),
+            chest: document.getElementById('peChest').value.trim(),
+            abdomen: document.getElementById('peAbdomen').value.trim(),
+            pelvis: document.getElementById('pePelvis').value.trim(),
+            perineal: document.getElementById('pePerineal').value.trim(),
+            back: document.getElementById('peBack').value.trim(),
+            upperRt: document.getElementById('peUpperRt').value.trim(),
+            upperLt: document.getElementById('peUpperLt').value.trim(),
+            lowerRt: document.getElementById('peLowerRt').value.trim(),
+            lowerLt: document.getElementById('peLowerLt').value.trim()
+          },
+          atHospital: document.getElementById('atHospital').value.trim(),
+          zone: document.getElementById('zone').value
+        };
+
+        if (editId) {
+          const index = records.findIndex(r => r.id === editId);
+          if (index !== -1) {
+            records[index] = recordData;
+            showToast('Rekod berjaya dikemaskini.');
+          }
+        } else {
+          records.unshift(recordData);
+          showToast('Rekod baharu berjaya disimpan.');
+        }
+
+        try {
+  await setDoc(
+    doc(db, "ambulance_records", recordData.id),
+    recordData
+  );
+
+  showToast('Rekod berjaya disimpan ke Firebase.');
+
+  resetFormToNew();
+  switchView('viewRecords');
+
+} catch (error) {
+  console.error('Firebase error:', error);
+  showToast('Gagal simpan: ' + error.message);
+}
+      };
+
+      window.editRecord = function (id) {
+        const rec = records.find(r => r.id === id);
+        if (!rec) return;
+
+        closeModal('viewModal');
+        resetFormToNew();
+
+        document.getElementById('editRecordId').value = rec.id;
+        document.getElementById('formModeTitle').textContent = 'Edit Rekod Kes: ' + (rec.callCardNo || '');
+        document.getElementById('btnSaveRecord').textContent = 'Simpan Perubahan';
+
+        document.getElementById('tarikh').value = rec.tarikh || '';
+        document.getElementById('callCardNo').value = rec.callCardNo || '';
+        document.getElementById('informFromMecc').value = rec.informFromMecc || '';
+
+        const t = rec.timer || {};
+        document.getElementById('timeActivation').value = t.activation || '';
+        document.getElementById('timeRolling').value = t.rolling || '';
+        document.getElementById('timeAtScene').value = t.atScene || '';
+        document.getElementById('timeTransporting').value = t.transporting || '';
+        document.getElementById('timeAtHospital').value = t.atHospital || '';
+        document.getElementById('timeClearCase').value = t.clearCase || '';
+        document.getElementById('timeReadyToMecc').value = t.readyToMecc || '';
+
+        const crewContainer = document.getElementById('crewContainer');
+        crewContainer.innerHTML = '';
+        if (Array.isArray(rec.crewNames) && rec.crewNames.length > 0) {
+          rec.crewNames.forEach(name => addCrewInput(name));
+        } else {
+          addCrewInput('');
+        }
+
+        document.getElementById('tempat').value = rec.tempat || '';
+        document.getElementById('mangsaPesakit').value = rec.mangsaPesakit || '';
+        document.getElementById('umur').value = rec.umur || '';
+        document.getElementById('cederaDiMana').value = rec.cederaDiMana || '';
+        document.getElementById('catatan').value = rec.catatan || '';
+
+        const pc = rec.patientCare || {};
+        document.getElementById('spo2').value = pc.spo2 || '';
+        document.getElementById('bpSys').value = pc.bpSys || '';
+        document.getElementById('bpDia').value = pc.bpDia || '';
+        document.getElementById('pulse').value = pc.pulse || '';
+        document.getElementById('rrMn').value = pc.rrMn || '';
+        document.getElementById('consciousLevel').value = pc.consciousLevel || '';
+        document.getElementById('gcsE').value = pc.gcsE || '';
+        document.getElementById('gcsV').value = pc.gcsV || '';
+        document.getElementById('gcsM').value = pc.gcsM || '';
+        document.getElementById('gcsTotal').value = pc.gcsTotal || '';
+        document.getElementById('painScore').value = pc.painScore || '';
+        document.getElementById('glucoseMeter').value = pc.glucoseMeter || '';
+
+        const pe = rec.physicalExam || {};
+        document.getElementById('peHead').value = pe.head || '';
+        document.getElementById('peNeck').value = pe.neck || '';
+        document.getElementById('peChest').value = pe.chest || '';
+        document.getElementById('peAbdomen').value = pe.abdomen || '';
+        document.getElementById('pePelvis').value = pe.pelvis || '';
+        document.getElementById('pePerineal').value = pe.perineal || '';
+        document.getElementById('peBack').value = pe.back || '';
+        document.getElementById('peUpperRt').value = pe.upperRt || '';
+        document.getElementById('peUpperLt').value = pe.upperLt || '';
+        document.getElementById('peLowerRt').value = pe.lowerRt || '';
+        document.getElementById('peLowerLt').value = pe.lowerLt || '';
+
+        document.getElementById('atHospital').value = rec.atHospital || '';
+        document.getElementById('zone').value = rec.zone || '';
+
+        switchView('viewForm');
+      };
+
+      /* ----------------------------------------------------------------------
+         5. PENJANAAN FORMAT TEKS ASAL & WHATSAPP SHARING
+         ---------------------------------------------------------------------- */
+      function buildFormattedRecordText(rec) {
+        const t = rec.timer || {};
+        const pc = rec.patientCare || {};
+        const pe = rec.physicalExam || {};
+
+        const crewText = (Array.isArray(rec.crewNames) && rec.crewNames.length > 0)
+          ? rec.crewNames.map((n, i) => `${i + 1}. ${n}`).join('\n')
+          : '-';
+
+        const bpText = (pc.bpSys || pc.bpDia) ? `${pc.bpSys || ''} / ${pc.bpDia || ''}` : '/';
+        const spo2Text = pc.spo2 ? `${pc.spo2}%` : '';
+
+        return [
+          'بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْمِ',
+          'السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ',
+          'SALAM AMBULANS HOTSPOT 999',
+          'BERHEMAH,MESRA PESAKIT,CEKAP .',
+          '',
+          `TARIKH: ${rec.tarikh || ''}`,
+          `CALL CARD NO: ${rec.callCardNo || ''}`,
+          '',
+          `INFORM FROM MECC: ${rec.informFromMecc || ''}`,
+          '',
+          'TIMER RESPONSE CASE',
+          `Activation: ${t.activation || ''}`,
+          `Rolling: ${t.rolling || ''}`,
+          `At Scene: ${t.atScene || ''}`,
+          `Transporting: ${t.transporting || ''}`,
+          `At Hospital: ${t.atHospital || ''}`,
+          `Clear Case: ${t.clearCase || ''}`,
+          `Ready To Mecc: ${t.readyToMecc || ''}`,
+          '',
+          'AMBULANCE CREW NAME:',
+          crewText,
+          '',
+          `Tempat: ${rec.tempat || ''}`,
+          `Mangsa/pesakit: ${rec.mangsaPesakit || ''}`,
+          `Umur: ${rec.umur || ''}`,
+          `Cedera Di Mana (CHIEF COMPLAINT): ${rec.cederaDiMana || ''}`,
+          '',
+          `CATATAN: ${rec.catatan || ''}`,
+          '',
+          'PATIENT CARE',
+          `Spo²: ${spo2Text}`,
+          `Bp: ${bpText}`,
+          `Pulse: ${pc.pulse || ''}`,
+          `RR/MN: ${pc.rrMn || ''}`,
+          `Conscious Level: ${pc.consciousLevel || ''}`,
+          `GCS: E:${pc.gcsE || ''} V:${pc.gcsV || ''} M:${pc.gcsM || ''} Total:${pc.gcsTotal || ''}/15`,
+          `Pain Score: ${pc.painScore || ''}/10`,
+          `GLUCOSE METER: ${pc.glucoseMeter || ''}`,
+          '',
+          'PHYSICAL EXAMANITION (GENERAL CONDITION)',
+          `Head- ${pe.head || ''}`,
+          `Neck- ${pe.neck || ''}`,
+          `Chest- ${pe.chest || ''}`,
+          `Abdomen - ${pe.abdomen || ''}`,
+          `Pelvis- ${pe.pelvis || ''}`,
+          `Perineal/Genitalia- ${pe.perineal || ''}`,
+          `Back - ${pe.back || ''}`,
+          `Upper limb- (RT) ${pe.upperRt || ''}`,
+          `Upper limb- (LT) ${pe.upperLt || ''}`,
+          `Lower limb- (RT) ${pe.lowerRt || ''}`,
+          `Lower limb- (LT) ${pe.lowerLt || ''}`,
+          '',
+          `AT HOSPITAL - ${rec.atHospital || ''}`,
+          `ZONE - ${rec.zone || ''}`
+        ].join('\n');
+      }
+
+      window.shareToWhatsApp = function (id) {
+        const rec = records.find(r => r.id === id);
+        if (!rec) return;
+
+        const messageText = buildFormattedRecordText(rec);
+        const encodedText = encodeURIComponent(messageText);
+        const whatsappUrl = `https://wa.me/?text=${encodedText}`;
+
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      };
+
+      /* ----------------------------------------------------------------------
+         6. VIEW RECORD, PRINT & DELETE RECORD
+         ---------------------------------------------------------------------- */
+      window.viewRecordDetail = function (id) {
+        const rec = records.find(r => r.id === id);
+        if (!rec) return;
+
+        const formatted = buildFormattedRecordText(rec);
+        document.getElementById('recordFormattedText').textContent = formatted;
+
+        document.getElementById('modalWhatsappBtn').onclick = function () {
+          shareToWhatsApp(id);
+        };
+        document.getElementById('modalPrintBtn').onclick = function () {
+          printRecord(id);
+        };
+        document.getElementById('modalEditBtn').onclick = function () {
+          editRecord(id);
+        };
+
+        openModal('viewModal');
+      };
+
+      window.printRecord = function (id) {
+        const rec = records.find(r => r.id === id);
+        if (!rec) return;
+
+        const printArea = document.getElementById('printArea');
+        printArea.textContent = buildFormattedRecordText(rec);
+        printArea.style.display = 'block';
+        window.print();
+        printArea.style.display = 'none';
+      };
+
+      window.promptDeleteRecord = function (id) {
+        const rec = records.find(r => r.id === id);
+        if (!rec) return;
+
+        pendingDeleteId = id;
+        document.getElementById('deleteTargetInfo').textContent =
+          `CALL CARD NO: ${rec.callCardNo || '-'} | Mangsa/pesakit: ${rec.mangsaPesakit || '-'} (${rec.tarikh || '-'})`;
+
+        document.getElementById('confirmDeleteBtn').onclick = function () {
+          if (pendingDeleteId) {
+            const idToDelete = pendingDeleteId;
+
+deleteDoc(
+  doc(db, "ambulance_records", idToDelete)
+)
+.then(() => {
+  showToast('Rekod berjaya dipadam dari Firebase.');
+  pendingDeleteId = null;
+  closeModal('deleteModal');
+})
+.catch(error => {
+  console.error(error);
+  showToast('Gagal memadam rekod: ' + error.message);
+});      
+      pendingDeleteId = null;
+            closeModal('deleteModal');
+            showToast('Rekod telah dipadam.');
+          }
+        };
+
+        openModal('deleteModal');
+      };
+
+      window.openModal = function (modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.add('active');
+      };
+
+      window.closeModal = function (modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.remove('active');
+      };
+
+      /* ----------------------------------------------------------------------
+         7. PAPARAN SENARAI REKOD & DASHBOARD
+         ---------------------------------------------------------------------- */
+      function escapeHTML(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function createRecordCardHTML(rec) {
+        return `
+          <article class="record-card">
+            <div class="record-meta">
+              <span class="record-callcard">CALL CARD NO: ${escapeHTML(rec.callCardNo || '-')}</span>
+              <span>TARIKH: <strong>${escapeHTML(rec.tarikh || '-')}</strong></span>
+            </div>
+            <div class="record-patient">${escapeHTML(rec.mangsaPesakit || 'Tiada Nama')}</div>
+            <div class="record-complaint">
+              <strong>Cedera Di Mana (CHIEF COMPLAINT):</strong> ${escapeHTML(rec.cederaDiMana || '-')}
+            </div>
+            <div class="record-actions">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="viewRecordDetail('${escapeHTML(rec.id)}')">
+                View
+              </button>
+              <button type="button" class="btn btn-whatsapp btn-sm" onclick="shareToWhatsApp('${escapeHTML(rec.id)}')">
+                SHARE TO WHATSAPP
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="editRecord('${escapeHTML(rec.id)}')">
+                Edit
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" onclick="promptDeleteRecord('${escapeHTML(rec.id)}')">
+                Delete
+              </button>
+            </div>
+          </article>
+        `;
+      }
+
+      window.renderRecordsList = function () {
+        const container = document.getElementById('recordsListContainer');
+        const badge = document.getElementById('totalSavedBadge');
+        const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+
+        const filtered = records.filter(rec => {
+          if (!query) return true;
+          const callCard = (rec.callCardNo || '').toLowerCase();
+          const tarikh = (rec.tarikh || '').toLowerCase();
+          const mangsa = (rec.mangsaPesakit || '').toLowerCase();
+          return callCard.includes(query) || tarikh.includes(query) || mangsa.includes(query);
+        });
+
+        badge.textContent = `${filtered.length} Rekod`;
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <p style="font-weight: 600; margin-bottom: 6px;">Tiada rekod ditemui.</p>
+              <p style="font-size: 0.88rem;">Tekan "Add New Record" untuk mula merekod kes ambulans.</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = filtered.map(createRecordCardHTML).join('');
+      };
+
+      function updateDashboard() {
+        const totalEl = document.getElementById('statTotalRecords');
+        const todayEl = document.getElementById('statTodayRecords');
+        const recentBadge = document.getElementById('recentBadge');
+        const recentContainer = document.getElementById('dashboardRecentList');
+
+        const today = new Date();
+        const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+        const todayCount = records.filter(r => r.tarikh === todayStr).length;
+
+        totalEl.textContent = records.length;
+        todayEl.textContent = todayCount;
+
+        const recentRecords = records.slice(0, 3);
+        recentBadge.textContent = `${recentRecords.length} Terkini`;
+
+        if (recentRecords.length === 0) {
+          recentContainer.innerHTML = `
+            <div class="empty-state">
+              <p>Belum ada rekod disimpan dalam peranti ini.</p>
+            </div>
+          `;
+        } else {
+          recentContainer.innerHTML = recentRecords.map(createRecordCardHTML).join('');
+        }
+      }
+
+      /* ----------------------------------------------------------------------
+         8. EXPORT & IMPORT BACKUP (JSON)
+         ---------------------------------------------------------------------- */
+      window.exportBackupJSON = function () {
+        if (records.length === 0) {
+          showToast('Tiada rekod untuk dieksport.');
+          return;
+        }
+
+        const backupPayload = {
+          app: 'AMBULANS HOTSPOT 999',
+          exportedAt: new Date().toISOString(),
+          totalRecords: records.length,
+          records: records
+        };
+
+        const dataStr = JSON.stringify(backupPayload, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const dateStamp = new Date().toISOString().slice(0, 10);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Backup_Ambulans_Hotspot_999_${dateStamp}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast('Fail sandaran JSON berjaya dimuat turun.');
+      };
+
+      window.triggerImportJSON = function () {
+        document.getElementById('importFileInput').click();
+      };
+
+      window.handleImportJSON = function (event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          try {
+            const parsed = JSON.parse(e.target.result);
+            const importedList = Array.isArray(parsed) ? parsed : parsed.records;
+
+            if (!Array.isArray(importedList)) {
+              throw new Error('Format fail JSON tidak sah.');
+            }
+
+            const existingIds = new Set(records.map(r => r.id));
+            let addedCount = 0;
+
+            importedList.forEach(item => {
+              if (item && typeof item === 'object' && item.id) {
+                if (!existingIds.has(item.id)) {
+                  records.push(item);
+                  existingIds.add(item.id);
+                  addedCount++;
+                }
+              }
+            });
+
+            records.sort((a, b) => (b.tarikh || '').localeCompare(a.tarikh || ''));
+            persistRecordsToStorage();
+            updateDashboard();
+            renderRecordsList();
+            showToast(`Import selesai: ${addedCount} rekod baharu ditambah.`);
+          } catch (err) {
+            console.error('Ralat import JSON:', err);
+            showToast('Gagal mengimport fail. Pastikan fail JSON adalah sah.');
+          } finally {
+            event.target.value = '';
+          }
+        };
+        reader.readAsText(file);
+      };
+
+      /* ----------------------------------------------------------------------
+         9. NOTIFIKASI TOAST
+         ---------------------------------------------------------------------- */
+      let toastTimer = null;
+      function showToast(message) {
+        const toast = document.getElementById('toastNotification');
+        toast.textContent = message;
+        toast.classList.add('show');
+
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3200);
+      }
+
+      // Mulakan aplikasi apabila DOM sedia
+      document.addEventListener('DOMContentLoaded', initApp);
+    })();
+ 
+
+</script>
+</body>
+</html>
