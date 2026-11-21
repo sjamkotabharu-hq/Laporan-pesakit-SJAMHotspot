@@ -953,136 +953,139 @@ textarea {
           </div>
         </div>
 
+     
 <!-- BAHAGIAN 5: PATIENT CARE -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">PATIENT CARE</h2>
-          </div>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">PATIENT CARE</h2>
+  </div>
 
-<div class="form-grid form-grid-2">
-            <div class="form-group">
-              <label for="spo2">Spo² (%)</label>
-              <input type="number" id="spo2" min="0" max="100" placeholder="Contoh: 98">
-            </div>
+  <div class="form-grid form-grid-2">
 
-<div class="form-group">
-              <label>Bp (mmHg)</label>
-              <div class="bp-wrapper">
-                <input type="number" id="bpSys" min="0" max="350" placeholder="Systolic">
-                <span>/</span>
-                <input type="number" id="bpDia" min="0" max="250" placeholder="Diastolic">
-              </div>
-            </div>
+    <!-- SPO2 BACaan PERTAMA -->
+    <div class="form-group">
+      <label for="spo2">Spo² (% / Oxygen Support)</label>
+      <input type="text" id="spo2"
+        placeholder="Contoh: 89% URA">
+    </div>
 
-<div class="form-group">
-              <label for="pulse">Pulse (bpm)</label>
-              <input type="number" id="pulse" min="0" max="300" placeholder="Contoh: 84">
-            </div>
+    <!-- SPO2 REPEAT -->
+    <div class="form-group">
+      <label for="spo2Repeat">↻ Repeat SpO²</label>
+      <input type="text" id="spo2Repeat"
+        placeholder="Contoh: 100% HFM">
+    </div>
 
-<div class="form-group">
-              <label for="rrMn">RR/MN</label>
-              <input type="number" id="rrMn" min="0" max="100" placeholder="Contoh: 18">
-            </div>
+    <!-- BP PERTAMA -->
+    <div class="form-group">
+      <label>BP (mmHg)</label>
+      <div class="bp-wrapper">
+        <input type="number" id="bpSys"
+          min="0" max="350" placeholder="Systolic">
+        <span>/</span>
+        <input type="number" id="bpDia"
+          min="0" max="250" placeholder="Diastolic">
+      </div>
+    </div>
 
-<div class="form-group">
-              <label for="consciousLevel">Conscious Level</label>
-              <select id="consciousLevel">
-                <option value="">-- Pilih Tahap Kesedaran --</option>
-                <option value="Alert">Alert</option>
-                <option value="Verbal">Verbal</option>
-                <option value="Pain">Pain</option>
-                <option value="Unresponsive">Unresponsive</option>
-              </select>
-            </div>
+    <!-- BP REPEAT -->
+    <div class="form-group">
+      <label>↻ Repeat BP (mmHg)</label>
+      <div class="bp-wrapper">
+        <input type="number" id="bpSysRepeat"
+          min="0" max="350" placeholder="Systolic">
+        <span>/</span>
+        <input type="number" id="bpDiaRepeat"
+          min="0" max="250" placeholder="Diastolic">
+      </div>
+    </div>
 
-<div class="form-group">
-              <label for="glucoseMeter">GLUCOSE METER: (mmol/L)</label>
-              <input type="number" id="glucoseMeter" step="0.1" min="0" max="50" placeholder="Contoh: 5.6">
-            </div>
-          </div>
+    <!-- PULSE PERTAMA -->
+    <div class="form-group">
+      <label for="pulse">Pulse (bpm)</label>
+      <input type="number" id="pulse"
+        min="0" max="300" placeholder="Contoh: 56">
+    </div>
 
-<!-- GCS Sub-panel -->
-          <div class="sub-panel">
-            <div class="sub-panel-title">GCS</div>
-            <div class="gcs-grid">
-              <div class="form-group">
-                <label for="gcsE">E:</label>
-                <input type="number" id="gcsE" min="1" max="4" placeholder="1-4" oninput="calculateGCSTotal()">
-              </div>
-              <div class="form-group">
-                <label for="gcsV">V:</label>
-                <input type="number" id="gcsV" min="1" max="5" placeholder="1-5" oninput="calculateGCSTotal()">
-              </div>
-              <div class="form-group">
-                <label for="gcsM">M:</label>
-                <input type="number" id="gcsM" min="1" max="6" placeholder="1-6" oninput="calculateGCSTotal()">
-              </div>
-              <div class="form-group">
-                <label for="gcsTotal">Total: /15</label>
-                <input type="number" id="gcsTotal" min="3" max="15" placeholder="/15">
-              </div>
-            </div>
-          </div>
+    <!-- PULSE REPEAT -->
+    <div class="form-group">
+      <label for="pulseRepeat">↻ Repeat Pulse (bpm)</label>
+      <input type="number" id="pulseRepeat"
+        min="0" max="300" placeholder="Contoh: 89">
+    </div>
 
-<div class="form-group" style="margin-top: 14px;">
-            <label for="painScore">Pain Score: /10</label>
-            <input type="number" id="painScore" min="0" max="10" placeholder="0 - 10">
-          </div>
-        </div>
+    <!-- RR -->
+    <div class="form-group">
+      <label for="rrMn">RR/MN</label>
+      <input type="number" id="rrMn"
+        min="0" max="100" placeholder="Contoh: 18">
+    </div>
 
-<!-- BAHAGIAN 6: PHYSICAL EXAMANITION (GENERAL CONDITION) -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">PHYSICAL EXAMANITION (GENERAL CONDITION)</h2>
-          </div>
+    <!-- CONSCIOUS LEVEL -->
+    <div class="form-group">
+      <label for="consciousLevel">Conscious Level</label>
+      <select id="consciousLevel">
+        <option value="">-- Pilih Tahap Kesedaran --</option>
+        <option value="Alert">Alert</option>
+        <option value="Verbal">Verbal</option>
+        <option value="Pain">Pain</option>
+        <option value="Unresponsive">Unresponsive</option>
+      </select>
+    </div>
 
-<div class="pe-grid">
-            <div class="pe-item form-group">
-              <label for="peHead">Head-</label>
-              <textarea id="peHead" placeholder="Catatan pemeriksaan Head"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="peNeck">Neck-</label>
-              <textarea id="peNeck" placeholder="Catatan pemeriksaan Neck"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="peChest">Chest-</label>
-              <textarea id="peChest" placeholder="Catatan pemeriksaan Chest"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="peAbdomen">Abdomen -</label>
-              <textarea id="peAbdomen" placeholder="Catatan pemeriksaan Abdomen"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="pePelvis">Pelvis-</label>
-              <textarea id="pePelvis" placeholder="Catatan pemeriksaan Pelvis"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="pePerineal">Perineal/Genitalia-</label>
-              <textarea id="pePerineal" placeholder="Catatan pemeriksaan Perineal/Genitalia"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="peBack">Back -</label>
-              <textarea id="peBack" placeholder="Catatan pemeriksaan Back"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="peUpperRt">Upper limb- (RT)</label>
-              <textarea id="peUpperRt" placeholder="Catatan pemeriksaan Upper limb (RT)"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="peUpperLt">Upper limb- (LT)</label>
-              <textarea id="peUpperLt" placeholder="Catatan pemeriksaan Upper limb (LT)"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="peLowerRt">Lower limb- (RT)</label>
-              <textarea id="peLowerRt" placeholder="Catatan pemeriksaan Lower limb (RT)"></textarea>
-            </div>
-            <div class="pe-item form-group">
-              <label for="peLowerLt">Lower limb- (LT)</label>
-              <textarea id="peLowerLt" placeholder="Catatan pemeriksaan Lower limb (LT)"></textarea>
-            </div>
-          </div>
-        </div>
+    <!-- GLUCOSE -->
+    <div class="form-group">
+      <label for="glucoseMeter">GLUCOSE METER (mmol/L)</label>
+      <input type="number" id="glucoseMeter"
+        step="0.1" min="0" max="50"
+        placeholder="Contoh: 5.6">
+    </div>
+
+  </div>
+
+  <!-- GCS SUB-PANEL -->
+  <div class="sub-panel">
+    <div class="sub-panel-title">GCS</div>
+
+    <div class="gcs-grid">
+      <div class="form-group">
+        <label for="gcsE">E:</label>
+        <input type="number" id="gcsE"
+          min="1" max="4" placeholder="1-4"
+          oninput="calculateGCSTotal()">
+      </div>
+
+      <div class="form-group">
+        <label for="gcsV">V:</label>
+        <input type="number" id="gcsV"
+          min="1" max="5" placeholder="1-5"
+          oninput="calculateGCSTotal()">
+      </div>
+
+      <div class="form-group">
+        <label for="gcsM">M:</label>
+        <input type="number" id="gcsM"
+          min="1" max="6" placeholder="1-6"
+          oninput="calculateGCSTotal()">
+      </div>
+
+      <div class="form-group">
+        <label for="gcsTotal">Total: /15</label>
+        <input type="number" id="gcsTotal"
+          min="3" max="15" placeholder="/15">
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN SCORE -->
+  <div class="form-group" style="margin-top: 14px;">
+    <label for="painScore">Pain Score: /10</label>
+    <input type="number" id="painScore"
+      min="0" max="10" placeholder="0 - 10">
+  </div>
+
+</div>
+   
 
 <!-- BAHAGIAN 7: AT HOSPITAL - ZONE - -->
         <div class="card">
@@ -1420,9 +1423,16 @@ await signInAnonymously(auth);
           catatan: document.getElementById('catatan').value.trim(),
           patientCare: {
             spo2: document.getElementById('spo2').value.trim(),
-            bpSys: document.getElementById('bpSys').value.trim(),
-            bpDia: document.getElementById('bpDia').value.trim(),
-            pulse: document.getElementById('pulse').value.trim(),
+spo2Repeat: document.getElementById('spo2Repeat').value.trim(),
+
+bpSys: document.getElementById('bpSys').value.trim(),
+bpDia: document.getElementById('bpDia').value.trim(),
+
+bpSysRepeat: document.getElementById('bpSysRepeat').value.trim(),
+bpDiaRepeat: document.getElementById('bpDiaRepeat').value.trim(),
+
+pulse: document.getElementById('pulse').value.trim(),
+pulseRepeat: document.getElementById('pulseRepeat').value.trim(),
             rrMn: document.getElementById('rrMn').value.trim(),
             consciousLevel: document.getElementById('consciousLevel').value,
             gcsE: document.getElementById('gcsE').value.trim(),
@@ -1515,19 +1525,31 @@ await signInAnonymously(auth);
         document.getElementById('cederaDiMana').value = rec.cederaDiMana || '';
         document.getElementById('catatan').value = rec.catatan || '';
 
+       
         const pc = rec.patientCare || {};
-        document.getElementById('spo2').value = pc.spo2 || '';
-        document.getElementById('bpSys').value = pc.bpSys || '';
-        document.getElementById('bpDia').value = pc.bpDia || '';
-        document.getElementById('pulse').value = pc.pulse || '';
-        document.getElementById('rrMn').value = pc.rrMn || '';
-        document.getElementById('consciousLevel').value = pc.consciousLevel || '';
-        document.getElementById('gcsE').value = pc.gcsE || '';
-        document.getElementById('gcsV').value = pc.gcsV || '';
-        document.getElementById('gcsM').value = pc.gcsM || '';
-        document.getElementById('gcsTotal').value = pc.gcsTotal || '';
-        document.getElementById('painScore').value = pc.painScore || '';
-        document.getElementById('glucoseMeter').value = pc.glucoseMeter || '';
+
+document.getElementById('spo2').value = pc.spo2 || '';
+document.getElementById('spo2Repeat').value = pc.spo2Repeat || '';
+
+document.getElementById('bpSys').value = pc.bpSys || '';
+document.getElementById('bpDia').value = pc.bpDia || '';
+
+document.getElementById('bpSysRepeat').value = pc.bpSysRepeat || '';
+document.getElementById('bpDiaRepeat').value = pc.bpDiaRepeat || '';
+
+document.getElementById('pulse').value = pc.pulse || '';
+document.getElementById('pulseRepeat').value = pc.pulseRepeat || '';
+
+document.getElementById('rrMn').value = pc.rrMn || '';
+document.getElementById('consciousLevel').value = pc.consciousLevel || '';
+
+document.getElementById('gcsE').value = pc.gcsE || '';
+document.getElementById('gcsV').value = pc.gcsV || '';
+document.getElementById('gcsM').value = pc.gcsM || '';
+document.getElementById('gcsTotal').value = pc.gcsTotal || '';
+
+document.getElementById('painScore').value = pc.painScore || '';
+document.getElementById('glucoseMeter').value = pc.glucoseMeter || '';
 
         const pe = rec.physicalExam || {};
         document.getElementById('peHead').value = pe.head || '';
@@ -1560,8 +1582,16 @@ await signInAnonymously(auth);
           ? rec.crewNames.map((n, i) => `${i + 1}. ${n}`).join('\n')
           : '-';
 
-        const bpText = (pc.bpSys || pc.bpDia) ? `${pc.bpSys || ''} / ${pc.bpDia || ''}` : '/';
-        const spo2Text = pc.spo2 ? `${pc.spo2}%` : '';
+        const bpText = (pc.bpSys || pc.bpDia)
+  ? `${pc.bpSys || ''} / ${pc.bpDia || ''}`
+  : '/';
+
+const bpRepeatText = (pc.bpSysRepeat || pc.bpDiaRepeat)
+  ? `${pc.bpSysRepeat || ''} / ${pc.bpDiaRepeat || ''}`
+  : '';
+
+const spo2Text = pc.spo2 || '';
+const spo2RepeatText = pc.spo2Repeat || '';
 
         return [
           'بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْمِ',
@@ -1595,8 +1625,11 @@ await signInAnonymously(auth);
           '',
           'PATIENT CARE',
           `Spo²: ${spo2Text}`,
-          `Bp: ${bpText}`,
-          `Pulse: ${pc.pulse || ''}`,
+`Spo² (Repeat): ${spo2RepeatText}`,
+`Bp: ${bpText}`,
+`Bp (Repeat): ${bpRepeatText}`,
+`Pulse: ${pc.pulse || ''}`,
+`Pulse (Repeat): ${pc.pulseRepeat || ''}`,
           `RR/MN: ${pc.rrMn || ''}`,
           `Conscious Level: ${pc.consciousLevel || ''}`,
           `GCS: E:${pc.gcsE || ''} V:${pc.gcsV || ''} M:${pc.gcsM || ''} Total:${pc.gcsTotal || ''}/15`,
