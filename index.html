@@ -826,6 +826,203 @@ textarea {
         </div>
       </div>
 
+<!-- ==================================================
+     STATISTIK ZON & ANALISIS KES AMBULANS
+     ================================================== -->
+
+<div class="card">
+
+<div class="card-header">
+
+<h2 class="card-title">
+      STATISTIK ZON & ANALISIS KES
+    </h2>
+
+<span class="badge" id="zoneStatsMonth">
+      Bulan Semasa
+    </span>
+
+</div>
+
+<div class="stats-grid">
+
+<!-- RED ZONE -->
+    <div class="stat-box"
+      style="background-color:#FCE7E7; border-color:#E8BABA;">
+
+<div class="stat-number"
+        id="statRedZone"
+        style="color:#A73535;">
+        0
+      </div>
+
+<div class="stat-label">
+        RED ZONE
+      </div>
+
+</div>
+
+<!-- YELLOW ZONE -->
+    <div class="stat-box"
+      style="background-color:#FFF1D6; border-color:#E8D09A;">
+
+<div class="stat-number"
+        id="statYellowZone"
+        style="color:#98640B;">
+        0
+      </div>
+
+<div class="stat-label">
+        YELLOW ZONE
+      </div>
+
+</div>
+
+<!-- GREEN ZONE -->
+    <div class="stat-box"
+      style="background-color:#E0F1E5; border-color:#B7D8C0;">
+
+<div class="stat-number"
+        id="statGreenZone"
+        style="color:#287348;">
+        0
+      </div>
+
+<div class="stat-label">
+        GREEN ZONE
+      </div>
+
+</div>
+
+<!-- STANDDOWN -->
+    <div class="stat-box"
+      style="background-color:#E8EAF0; border-color:#C8CDD8;">
+
+<div class="stat-number"
+        id="statStanddown"
+        style="color:#475569;">
+        0
+      </div>
+
+<div class="stat-label">
+        STANDDOWN
+      </div>
+
+</div>
+
+</div>
+
+<!-- JUMLAH KESELURUHAN -->
+  <div style="
+    background-color:var(--pastel-blue);
+    border:1px solid var(--pastel-blue-border);
+    border-radius:12px;
+    padding:14px;
+    text-align:center;
+    margin-top:12px;
+  ">
+
+<div class="stat-label">
+      JUMLAH KESELURUHAN 4 KATEGORI
+    </div>
+
+<div class="stat-number"
+      id="statZoneTotal">
+      0
+    </div>
+
+</div>
+
+<p style="
+    font-size:0.78rem;
+    color:var(--text-muted);
+    margin-top:10px;
+  ">
+    Statistik dikira berdasarkan jumlah rekod kes
+    bagi bulan semasa.
+  </p>
+
+</div>
+
+<!-- TAMAT STATISTIK ZON -->
+
+<!-- ==================================================
+     ANALISIS GRAF ZON AMBULANS
+     ================================================== -->
+
+<div class="card">
+
+<div class="card-header">
+
+<h2 class="card-title">
+      GRAF & ANALISIS OPERASI
+    </h2>
+
+</div>
+
+<!-- PILIH BULAN ANALISIS -->
+  <div class="form-group" style="margin-bottom:18px;">
+
+<label for="dashboardStatsMonth">
+      PILIH BULAN ANALISIS:
+    </label>
+
+<select
+      id="dashboardStatsMonth"
+      onchange="updateDashboard()">
+    </select>
+
+<small style="color:var(--text-muted);">
+      Pilih bulan untuk melihat statistik dan graf.
+    </small>
+
+</div>
+
+<!-- GRAF PERBANDINGAN -->
+  <div style="margin-bottom:24px;">
+
+<h3 style="font-size:0.95rem;margin-bottom:12px;">
+      1. GRAF PERBANDINGAN ZON
+    </h3>
+
+<div id="chartZoneComparison"></div>
+
+</div>
+
+<!-- GRAF PERATUSAN -->
+  <div style="margin-bottom:24px;">
+
+<h3 style="font-size:0.95rem;margin-bottom:12px;">
+      2. PERATUSAN MENGIKUT ZON
+    </h3>
+
+<div id="chartZonePercentage"></div>
+
+</div>
+
+<!-- GRAF TREND BULANAN -->
+  <div>
+
+<h3 style="font-size:0.95rem;margin-bottom:12px;">
+      3. TREND OPERASI BULANAN
+    </h3>
+
+<p style="
+      font-size:0.8rem;
+      color:var(--text-muted);
+      margin-bottom:12px;
+    ">
+      Perbandingan jumlah kes bagi enam bulan terkini.
+    </p>
+
+<div id="chartMonthlyTrend"></div>
+
+</div>
+
+</div>
+
+<!-- TAMAT ANALISIS GRAF -->
+
 <!-- Peringatan Keselamatan & Privasi Data -->
 <div class="privacy-notice">
   <strong>PERINGATAN KESELAMATAN & PRIVASI MAKLUMAT PESAKIT</strong>
@@ -1098,7 +1295,6 @@ textarea {
     </h2>
   </div>
 
-
 <div class="pe-grid">
 
 <!-- GENERAL CONDITION - KOTAK BAHARU -->
@@ -1117,7 +1313,6 @@ textarea {
   <label for="peHead">Head -</label>
   <textarea id="peHead"></textarea>
 </div>
-
 
 <div class="pe-item form-group">
       <label for="peNeck">Neck -</label>
@@ -1184,14 +1379,22 @@ textarea {
             </div>
             <div class="form-group">
               <label for="zone">ZONE -</label>
-              <select id="zone">
-                <option value="">-- Pilih Zon --</option>
-                <option value="RED ZONE">RED ZONE</option>
-                <option value="YELLOW ZONE">YELLOW ZONE</option>
-                <option value="GREEN ZONE">GREEN ZONE</option>
-                <option value="CCARS / ISOLATION">CCARS / ISOLATION</option>
-                <option value="LAIN-LAIN">LAIN-LAIN</option>
-              </select>
+
+<select id="zone">
+  <option value="">-- Pilih Zon --</option>
+
+<option value="RED ZONE">RED ZONE</option>
+
+<option value="YELLOW ZONE">YELLOW ZONE</option>
+
+<option value="GREEN ZONE">GREEN ZONE</option>
+
+<option value="STANDDOWN">STANDDOWN</option>
+
+<option value="CCARS / ISOLATION">CCARS / ISOLATION</option>
+
+<option value="LAIN-LAIN">LAIN-LAIN</option>
+</select>
             </div>
           </div>
 
@@ -1217,13 +1420,38 @@ textarea {
           <span class="badge" id="totalSavedBadge">0 Rekod</span>
         </div>
 
+<!-- PILIH BULAN REKOD -->
+<div class="form-group" style="margin-bottom: 16px;">
+
+<label for="monthFilter">
+    PILIH BULAN REKOD:
+  </label>
+
+<select id="monthFilter" onchange="renderRecordsList()">
+  </select>
+
+<small style="color: var(--text-muted);">
+    Pilih bulan untuk melihat semua sejarah kes ambulans.
+  </small>
+
+</div>
+
+<!-- CARIAN REKOD -->
 <div class="search-box">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="searchInput" placeholder="Cari CALL CARD NO atau TARIKH (YYYY-MM-DD)..." oninput="renderRecordsList()">
-        </div>
+
+<svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+
+<input
+    type="text"
+    id="searchInput"
+    placeholder="Cari CALL CARD NO atau TARIKH (YYYY-MM-DD)..."
+    oninput="renderRecordsList()"
+  >
+
+</div>
 
 <div id="recordsListContainer"></div>
       </div>
@@ -1390,12 +1618,20 @@ function startRealtimeSync() {
         id: item.id
       }));
 
-      records.sort((a, b) =>
-        (b.tarikh || '').localeCompare(a.tarikh || '')
-      );
+      
+records.sort((a, b) =>
+  (b.tarikh || '').localeCompare(a.tarikh || '')
+);
 
-      updateDashboard();
-      renderRecordsList();
+// Kemas kini senarai bulan
+
+populateMonthFilter();
+
+populateDashboardStatsMonth();
+
+updateDashboard();
+
+renderRecordsList();
 
       console.log("Dashboard dikemaskini.");
       console.log("Saved Records dikemaskini.");
@@ -1415,6 +1651,168 @@ function startRealtimeSync() {
     }
   );
 }
+
+
+/* =====================================================
+   SISTEM PENAPIS BULAN REKOD
+   ===================================================== */
+
+// Dapatkan bulan semasa
+function getCurrentMonthKey() {
+
+  const today = new Date();
+
+  const year = today.getFullYear();
+
+  const month = String(
+    today.getMonth() + 1
+  ).padStart(2, '0');
+
+  return `${year}-${month}`;
+}
+
+
+/* =====================================================
+   SISTEM PENAPIS BULAN REKOD
+   ===================================================== */
+
+// Dapatkan bulan semasa
+function getCurrentMonthKey() {
+
+  const today = new Date();
+
+  const year = today.getFullYear();
+
+  const month = String(
+    today.getMonth() + 1
+  ).padStart(2, '0');
+
+  return `${year}-${month}`;
+}
+
+
+// =====================================================
+// DAPATKAN BULAN DARIPADA TARIKH REKOD
+// =====================================================
+
+function getMonthKey(dateValue) {
+
+  if (!dateValue) return '';
+
+  return String(dateValue).slice(0, 7);
+
+}
+
+
+// =====================================================
+// DROPDOWN BULAN ANALISIS DASHBOARD
+// =====================================================
+
+function populateDashboardStatsMonth() {
+
+  const select =
+    document.getElementById('dashboardStatsMonth');
+
+  if (!select) return;
+
+  const previousMonth = select.value;
+
+  const monthList = [
+    ...new Set([
+      getCurrentMonthKey(),
+      ...records
+        .map(record => getMonthKey(record.tarikh))
+        .filter(Boolean)
+    ])
+  ];
+
+  monthList.sort((a, b) => b.localeCompare(a));
+
+  select.innerHTML = monthList.map(monthKey => {
+
+    const parts = monthKey.split('-');
+
+    const year = Number(parts[0]);
+    const month = Number(parts[1]);
+
+    const label = new Date(
+      year,
+      month - 1,
+      1
+    ).toLocaleDateString('ms-MY', {
+      month: 'long',
+      year: 'numeric'
+    });
+
+    return `
+      <option value="${monthKey}">
+        ${label}
+      </option>
+    `;
+
+  }).join('');
+
+  select.value = monthList.includes(previousMonth)
+    ? previousMonth
+    : getCurrentMonthKey();
+
+}
+
+
+// =====================================================
+// DROPDOWN BULAN SAVED RECORDS
+// =====================================================
+
+function populateMonthFilter() {
+
+  const monthSelect =
+    document.getElementById('monthFilter');
+
+  if (!monthSelect) return;
+
+  const previousMonth = monthSelect.value;
+
+  const monthList = [
+    ...new Set([
+      getCurrentMonthKey(),
+      ...records
+        .map(record => getMonthKey(record.tarikh))
+        .filter(Boolean)
+    ])
+  ];
+
+  monthList.sort((a, b) => b.localeCompare(a));
+
+  monthSelect.innerHTML = monthList.map(monthKey => {
+
+    const parts = monthKey.split('-');
+
+    const year = Number(parts[0]);
+    const month = Number(parts[1]);
+
+    const monthName = new Date(
+      year,
+      month - 1,
+      1
+    ).toLocaleDateString('ms-MY', {
+      month: 'long',
+      year: 'numeric'
+    });
+
+    return `
+      <option value="${monthKey}">
+        ${monthName}
+      </option>
+    `;
+
+  }).join('');
+
+  monthSelect.value = monthList.includes(previousMonth)
+    ? previousMonth
+    : getCurrentMonthKey();
+
+}
+
       function setDefaultDate() {
         const dateInput = document.getElementById('tarikh');
         if (dateInput && !dateInput.value) {
@@ -2078,60 +2476,609 @@ window.promptDeleteRecord = function (id) {
         `;
       }
 
-      window.renderRecordsList = function () {
-        const container = document.getElementById('recordsListContainer');
-        const badge = document.getElementById('totalSavedBadge');
-        const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+window.renderRecordsList = function () {
 
-        const filtered = records.filter(rec => {
-          if (!query) return true;
-          const callCard = (rec.callCardNo || '').toLowerCase();
-          const tarikh = (rec.tarikh || '').toLowerCase();
-          return callCard.includes(query) || tarikh.includes(query);
-        });
+  const container = document.getElementById('recordsListContainer');
 
-        badge.textContent = `${filtered.length} Rekod`;
+  const badge = document.getElementById('totalSavedBadge');
 
-        if (filtered.length === 0) {
-          container.innerHTML = `
-            <div class="empty-state">
-              <p style="font-weight: 600; margin-bottom: 6px;">Tiada rekod ditemui.</p>
-              <p style="font-size: 0.88rem;">Tekan "Add New Record" untuk mula merekod kes ambulans.</p>
+  const searchInput = document.getElementById('searchInput');
+
+  const monthSelect = document.getElementById('monthFilter');
+
+  const query = (searchInput.value || '')
+    .toLowerCase()
+    .trim();
+
+  // Bulan yang sedang dipilih
+  const selectedMonth =
+    monthSelect.value || getCurrentMonthKey();
+
+  // Tapis rekod mengikut bulan dan carian
+  const filtered = records.filter(rec => {
+
+    // Pastikan hanya bulan dipilih dipaparkan
+    if (getMonthKey(rec.tarikh) !== selectedMonth) {
+      return false;
+    }
+
+    // Jika tiada carian, paparkan semua rekod bulan tersebut
+    if (!query) return true;
+
+    const callCard = (rec.callCardNo || '')
+      .toLowerCase();
+
+    const tarikh = (rec.tarikh || '')
+      .toLowerCase();
+
+    return (
+      callCard.includes(query) ||
+      tarikh.includes(query)
+    );
+
+  });
+
+  // Jumlah rekod untuk bulan yang dipilih
+  badge.textContent = `${filtered.length} Rekod`;
+
+  // Jika tiada rekod
+  if (filtered.length === 0) {
+
+    const selectedMonthLabel =
+      monthSelect.options[monthSelect.selectedIndex]?.text
+      || selectedMonth;
+
+    container.innerHTML = `
+
+      <div class="empty-state">
+
+        <p style="font-weight: 600; margin-bottom: 6px;">
+
+          Tiada rekod ditemui.
+
+        </p>
+
+        <p style="font-size: 0.88rem;">
+
+          Tiada rekod untuk ${selectedMonthLabel}
+          atau carian tidak sepadan.
+
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  // Paparkan semua rekod bulan dipilih
+  container.innerHTML = filtered
+    .map(createRecordCardHTML)
+    .join('');
+
+};
+
+      
+function updateDashboard() {
+
+  // ==========================================
+  // 1. ELEMEN DASHBOARD
+  // ==========================================
+
+  const totalEl =
+    document.getElementById('statTotalRecords');
+
+  const todayEl =
+    document.getElementById('statTodayRecords');
+
+  const recentBadge =
+    document.getElementById('recentBadge');
+
+  const recentContainer =
+    document.getElementById('dashboardRecentList');
+
+
+  // ==========================================
+  // 2. JUMLAH REKOD KESELURUHAN & HARI INI
+  // ==========================================
+
+  const today = new Date();
+
+  const todayStr =
+    `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+  const todayCount = records.filter(
+    r => r.tarikh === todayStr
+  ).length;
+
+  totalEl.textContent = records.length;
+
+  todayEl.textContent = todayCount;
+
+
+  // ==========================================
+  // 3. TENTUKAN BULAN SEMASA
+  // ==========================================
+
+  
+const currentMonth =
+  document.getElementById('dashboardStatsMonth')?.value
+  || getCurrentMonthKey();
+
+
+  const currentMonthRecords = records.filter(
+    record =>
+      getMonthKey(record.tarikh) === currentMonth
+  );
+
+
+  // Paparkan nama bulan
+  const parts = currentMonth.split('-');
+
+  const year = Number(parts[0]);
+
+  const month = Number(parts[1]);
+
+  const monthLabel = new Date(
+    year,
+    month - 1,
+    1
+  ).toLocaleDateString('ms-MY', {
+    month: 'long',
+    year: 'numeric'
+  });
+
+  document.getElementById('zoneStatsMonth').textContent =
+    monthLabel;
+
+
+  // ==========================================
+  // 4. KIRA JUMLAH MENGIKUT ZON
+  // ==========================================
+
+  function countZone(zoneName) {
+
+    return currentMonthRecords.filter(record =>
+
+      String(record.zone || '')
+        .trim()
+        .toUpperCase() === zoneName
+
+    ).length;
+
+  }
+
+
+  const redCount = countZone('RED ZONE');
+
+  const yellowCount = countZone('YELLOW ZONE');
+
+  const greenCount = countZone('GREEN ZONE');
+
+  const standdownCount = countZone('STANDDOWN');
+
+
+  // ==========================================
+  // 5. PAPARKAN STATISTIK
+  // ==========================================
+
+  document.getElementById('statRedZone').textContent =
+    redCount;
+
+  document.getElementById('statYellowZone').textContent =
+    yellowCount;
+
+  document.getElementById('statGreenZone').textContent =
+    greenCount;
+
+  document.getElementById('statStanddown').textContent =
+    standdownCount;
+
+
+  // Jumlah empat kategori
+  const totalZone =
+    redCount +
+    yellowCount +
+    greenCount +
+    standdownCount;
+
+  document.getElementById('statZoneTotal').textContent =
+    totalZone;
+
+
+  // ==========================================
+  // 6. REKOD TERKINI BULAN SEMASA
+  // ==========================================
+
+  const recentRecords = currentMonthRecords.slice(0, 3);
+
+  recentBadge.textContent =
+    `${recentRecords.length} Terkini`;
+
+
+  if (recentRecords.length === 0) {
+
+    recentContainer.innerHTML = `
+
+      <div class="empty-state">
+
+        <p>
+          Belum ada rekod untuk bulan semasa.
+        </p>
+
+      </div>
+
+    `;
+
+  } else {
+
+    recentContainer.innerHTML =
+      recentRecords.map(createRecordCardHTML).join('');
+
+  }
+
+// Kemas kini semua graf analisis
+updateZoneAnalytics();
+
+}
+
+// BENARKAN HTML MEMANGGIL UPDATE DASHBOARD
+window.updateDashboard = updateDashboard;
+
+
+/* =====================================================
+   SISTEM GRAF & ANALISIS OPERASI AMBULANS
+   ===================================================== */
+
+function updateZoneAnalytics() {
+
+  const select =
+    document.getElementById('dashboardStatsMonth');
+
+  if (!select) return;
+
+  const selectedMonth = select.value;
+
+  if (!selectedMonth) return;
+
+  const zones = [
+    {
+      name: 'RED ZONE',
+      color: '#C94C4C'
+    },
+    {
+      name: 'YELLOW ZONE',
+      color: '#D9A02F'
+    },
+    {
+      name: 'GREEN ZONE',
+      color: '#4D9B70'
+    },
+    {
+      name: 'STANDDOWN',
+      color: '#64748B'
+    }
+  ];
+
+
+  // ==========================================
+  // FUNGSI KIRAAN MENGIKUT BULAN
+  // ==========================================
+
+  function getCounts(monthKey) {
+
+    const monthlyRecords = records.filter(record =>
+      getMonthKey(record.tarikh) === monthKey
+    );
+
+    return zones.map(zone => ({
+
+      name: zone.name,
+
+      color: zone.color,
+
+      count: monthlyRecords.filter(record =>
+        String(record.zone || '')
+          .trim()
+          .toUpperCase() === zone.name
+      ).length
+
+    }));
+
+  }
+
+
+  const counts = getCounts(selectedMonth);
+
+  const total = counts.reduce(
+    (sum, item) => sum + item.count,
+    0
+  );
+
+
+  // ==========================================
+  // 1. GRAF PERBANDINGAN ZON
+  // ==========================================
+
+  const comparison =
+    document.getElementById('chartZoneComparison');
+
+  const maxCount = Math.max(
+    1,
+    ...counts.map(item => item.count)
+  );
+
+  comparison.innerHTML = counts.map(item => {
+
+    const width = (item.count / maxCount) * 100;
+
+    return `
+
+      <div style="margin-bottom:16px;">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          font-size:0.85rem;
+          font-weight:600;
+          margin-bottom:6px;
+        ">
+
+          <span>${item.name}</span>
+
+          <span>${item.count} kes</span>
+
+        </div>
+
+        <div style="
+          height:16px;
+          background:#EDF0F3;
+          border-radius:20px;
+          overflow:hidden;
+        ">
+
+          <div style="
+            width:${width}%;
+            height:100%;
+            background:${item.color};
+            border-radius:20px;
+            transition:width 0.3s;
+          "></div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join('');
+
+
+  // ==========================================
+  // 2. GRAF PERATUSAN ZON
+  // ==========================================
+
+  const percentage =
+    document.getElementById('chartZonePercentage');
+
+  if (total === 0) {
+
+    percentage.innerHTML = `
+      <div class="empty-state">
+        Tiada data untuk bulan ini.
+      </div>
+    `;
+
+  } else {
+
+    percentage.innerHTML = counts.map(item => {
+
+      const percent =
+        (item.count / total) * 100;
+
+      return `
+
+        <div style="margin-bottom:14px;">
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            font-size:0.85rem;
+            margin-bottom:6px;
+          ">
+
+            <strong>${item.name}</strong>
+
+            <strong>${percent.toFixed(1)}%</strong>
+
+          </div>
+
+          <div style="
+            height:13px;
+            background:#EDF0F3;
+            border-radius:20px;
+            overflow:hidden;
+          ">
+
+            <div style="
+              width:${percent}%;
+              height:100%;
+              background:${item.color};
+              border-radius:20px;
+            "></div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join('');
+
+  }
+
+
+  // ==========================================
+  // 3. TREND OPERASI ENAM BULAN TERKINI
+  // ==========================================
+
+  const trend =
+    document.getElementById('chartMonthlyTrend');
+
+  const months = [
+    ...new Set([
+      getCurrentMonthKey(),
+      ...records
+        .map(record => getMonthKey(record.tarikh))
+        .filter(Boolean)
+    ])
+  ]
+  .sort((a, b) => b.localeCompare(a))
+  .slice(0, 6)
+  .reverse();
+
+
+  const trendData = months.map(monthKey => {
+
+    const parts = monthKey.split('-');
+
+    const label = new Date(
+      Number(parts[0]),
+      Number(parts[1]) - 1,
+      1
+    ).toLocaleDateString('ms-MY', {
+      month: 'short',
+      year: '2-digit'
+    });
+
+    return {
+      label,
+      monthKey,
+      counts: getCounts(monthKey)
+    };
+
+  });
+
+
+  const allTrendValues = trendData.flatMap(month =>
+    month.counts.map(item => item.count)
+  );
+
+  const maxTrend = Math.max(
+    1,
+    ...allTrendValues
+  );
+
+
+  if (trendData.length === 0) {
+
+    trend.innerHTML = `
+      <div class="empty-state">
+        Belum ada data bulanan.
+      </div>
+    `;
+
+  } else {
+
+    trend.innerHTML = trendData.map(month => {
+
+      const monthTotal = month.counts.reduce(
+        (sum, item) => sum + item.count,
+        0
+      );
+
+      const bars = month.counts.map(item => {
+
+        const width =
+          (item.count / maxTrend) * 100;
+
+        return `
+
+          <div style="
+            display:flex;
+            align-items:center;
+            gap:8px;
+            margin-bottom:7px;
+          ">
+
+            <span style="
+              width:78px;
+              font-size:0.7rem;
+              color:var(--text-secondary);
+            ">
+              ${item.name}
+            </span>
+
+            <div style="
+              flex:1;
+              height:10px;
+              background:#EDF0F3;
+              border-radius:20px;
+              overflow:hidden;
+            ">
+
+              <div style="
+                width:${width}%;
+                height:100%;
+                background:${item.color};
+                border-radius:20px;
+              "></div>
+
             </div>
-          `;
-          return;
-        }
 
-        container.innerHTML = filtered.map(createRecordCardHTML).join('');
-      };
+            <strong style="
+              width:24px;
+              text-align:right;
+              font-size:0.75rem;
+            ">
+              ${item.count}
+            </strong>
 
-      function updateDashboard() {
-        const totalEl = document.getElementById('statTotalRecords');
-        const todayEl = document.getElementById('statTodayRecords');
-        const recentBadge = document.getElementById('recentBadge');
-        const recentContainer = document.getElementById('dashboardRecentList');
+          </div>
 
-        const today = new Date();
-        const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        `;
 
-        const todayCount = records.filter(r => r.tarikh === todayStr).length;
+      }).join('');
 
-        totalEl.textContent = records.length;
-        todayEl.textContent = todayCount;
 
-        const recentRecords = records.slice(0, 3);
-        recentBadge.textContent = `${recentRecords.length} Terkini`;
+      return `
 
-        if (recentRecords.length === 0) {
-          recentContainer.innerHTML = `
-            <div class="empty-state">
-              <p>Belum ada rekod disimpan dalam peranti ini.</p>
-            </div>
-          `;
-        } else {
-          recentContainer.innerHTML = recentRecords.map(createRecordCardHTML).join('');
-        }
-      }
+        <div style="
+          padding:14px;
+          border:1px solid var(--border-color);
+          border-radius:10px;
+          margin-bottom:12px;
+        ">
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:12px;
+          ">
+
+            <strong>${month.label}</strong>
+
+            <span class="badge">
+              ${monthTotal} Kes
+            </span>
+
+          </div>
+
+          ${bars}
+
+        </div>
+
+      `;
+
+    }).join('');
+
+  }
+
+}
+
 
       /* ----------------------------------------------------------------------
          8. EXPORT & IMPORT BACKUP (JSON)
@@ -2258,5 +3205,3 @@ if ("serviceWorker" in navigator) {
 </script>
 </body>
 </html>
-
-
