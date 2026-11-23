@@ -933,8 +933,15 @@ textarea {
             </div>
             <div class="form-grid form-grid-2">
               <div class="form-group">
-                <label for="mangsaPesakit">Mangsa/pesakit</label>
-                <input type="text" id="mangsaPesakit" placeholder="Nama penuh / pengenalan pesakit" required>
+                <label for="mangsaPesakit">Bilangan Pesakit</label>
+<input
+  type="number"
+  id="mangsaPesakit"
+  min="1"
+  step="1"
+  placeholder="(Contoh: 1 orang pesakit lelaki/perepmuan melayu)"
+  required
+>
               </div>
               <div class="form-group">
                 <label for="umur">Umur</label>
@@ -1203,7 +1210,7 @@ textarea {
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="searchInput" placeholder="Cari CALL CARD NO, TARIKH (YYYY-MM-DD) atau Mangsa/pesakit..." oninput="renderRecordsList()">
+          <input type="text" id="searchInput" placeholder="Cari CALL CARD NO atau TARIKH (YYYY-MM-DD)..." oninput="renderRecordsList()">
         </div>
 
 <div id="recordsListContainer"></div>
@@ -1781,7 +1788,7 @@ const spo2RepeatText = pc.spo2Repeat || '';
           crewText,
           '',
           `Tempat: ${rec.tempat || ''}`,
-          `Mangsa/pesakit: ${rec.mangsaPesakit || ''}`,
+          `Bilangan Pesakit: ${rec.mangsaPesakit || ''}`,
           `Umur: ${rec.umur || ''}`,
           `Cedera Di Mana (CHIEF COMPLAINT): ${rec.cederaDiMana || ''}`,
           '',
@@ -1871,7 +1878,7 @@ window.promptDeleteRecord = function (id) {
   pendingDeleteId = id;
 
   document.getElementById('deleteTargetInfo').textContent =
-    `CALL CARD NO: ${rec.callCardNo || '-'} | Mangsa/pesakit: ${rec.mangsaPesakit || '-'} (${rec.tarikh || '-'})`;
+    `CALL CARD NO: ${rec.callCardNo || '-'} | Bilangan Pesakit: ${rec.mangsaPesakit || '-'} (${rec.tarikh || '-'})`;
 
   document.getElementById('confirmDeleteBtn').onclick =
     async function () {
@@ -1948,7 +1955,9 @@ window.promptDeleteRecord = function (id) {
               <span class="record-callcard">CALL CARD NO: ${escapeHTML(rec.callCardNo || '-')}</span>
               <span>TARIKH: <strong>${escapeHTML(rec.tarikh || '-')}</strong></span>
             </div>
-            <div class="record-patient">${escapeHTML(rec.mangsaPesakit || 'Tiada Nama')}</div>
+            <div class="record-patient">
+  Bilangan Pesakit: ${escapeHTML(rec.mangsaPesakit || '-')}
+</div>
             <div class="record-complaint">
               <strong>Cedera Di Mana (CHIEF COMPLAINT):</strong> ${escapeHTML(rec.cederaDiMana || '-')}
             </div>
@@ -1979,8 +1988,7 @@ window.promptDeleteRecord = function (id) {
           if (!query) return true;
           const callCard = (rec.callCardNo || '').toLowerCase();
           const tarikh = (rec.tarikh || '').toLowerCase();
-          const mangsa = (rec.mangsaPesakit || '').toLowerCase();
-          return callCard.includes(query) || tarikh.includes(query) || mangsa.includes(query);
+          return callCard.includes(query) || tarikh.includes(query);
         });
 
         badge.textContent = `${filtered.length} Rekod`;
