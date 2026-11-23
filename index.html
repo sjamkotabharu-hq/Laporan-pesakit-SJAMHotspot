@@ -1823,16 +1823,92 @@ const spo2RepeatText = pc.spo2Repeat || '';
         ].join('\n');
       }
 
-      window.shareToWhatsApp = function (id) {
-        const rec = records.find(r => r.id === id);
-        if (!rec) return;
+      
+window.shareToWhatsApp = function (id) {
+  const rec = records.find(r => r.id === id);
+  if (!rec) return;
 
-        const messageText = buildFormattedRecordText(rec);
-        const encodedText = encodeURIComponent(messageText);
-        const whatsappUrl = `https://wa.me/?text=${encodedText}`;
+  // Ambil teks asal rekod
+  const originalText = buildFormattedRecordText(rec);
 
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      };
+  // Tajuk utama yang perlu BOLD
+  const headings = [
+    'SALAM AMBULANS HOTSPOT 999',
+    'BERHEMAH,MESRA PESAKIT,CEKAP .',
+    'TIMER RESPONSE CASE',
+    'AMBULANCE CREW NAME:',
+    'PATIENT CARE',
+    'PHYSICAL EXAMANITION (GENERAL CONDITION)',
+    'PHYSICAL EXAMINATION (GENERAL CONDITION)'
+  ];
+
+  // Format setiap baris
+  const messageText = originalText
+    .split('\n')
+    .map(line => {
+
+      const trimmed = line.trim();
+
+      // Kekalkan baris kosong
+      if (!trimmed) return line;
+
+      // BOLD tajuk utama
+      if (headings.includes(trimmed)) {
+        return `*${trimmed}*`;
+      }
+
+      // Kekalkan nama anggota
+      if (/^\d+\.\s/.test(trimmed)) {
+        return line;
+      }
+
+      // BOLD label Physical Examination
+      const physical = line.match(
+        /^(Head|Neck|Chest|Abdomen|Pelvis|Perineal\/Genitalia|Back|Upper limb|Lower limb)\s*-\s*(\((?:RT|LT)\))?\s*(.*)$/i
+      );
+
+      if (physical) {
+        const label = physical[1] +
+          (physical[2] ? ' ' + physical[2] : '');
+
+        return `*${label} -* ${physical[3]}`;
+      }
+
+      // BOLD label AT HOSPITAL dan ZONE
+      const hospital = line.match(
+        /^(AT HOSPITAL|ZONE)\s*-\s*(.*)$/i
+      );
+
+      if (hospital) {
+        return `*${hospital[1]} -* ${hospital[2]}`;
+      }
+
+      // BOLD label sebelum tanda :
+      // Contoh: TARIKH, BP, GCS, Pulse
+      const colon = line.match(/^([^:]+:)\s*(.*)$/);
+
+      if (colon) {
+        return `*${colon[1]}* ${colon[2]}`;
+      }
+
+      // Kekalkan baris lain
+      return line;
+
+    })
+    .join('\n');
+
+  // Hantar ke WhatsApp
+  const encodedText = encodeURIComponent(messageText);
+
+  const whatsappUrl =
+    `https://wa.me/?text=${encodedText}`;
+
+  window.open(
+    whatsappUrl,
+    '_blank',
+    'noopener,noreferrer'
+  );
+};
 
       /* ----------------------------------------------------------------------
          6. VIEW RECORD, PRINT & DELETE RECORD
@@ -2157,5 +2233,3 @@ if ("serviceWorker" in navigator) {
 </script>
 </body>
 </html>
-
-
