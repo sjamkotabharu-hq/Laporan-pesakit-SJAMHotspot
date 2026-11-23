@@ -1098,12 +1098,26 @@ textarea {
     </h2>
   </div>
 
+
 <div class="pe-grid">
 
+<!-- GENERAL CONDITION - KOTAK BAHARU -->
 <div class="pe-item form-group">
-      <label for="peHead">Head -</label>
-      <textarea id="peHead"></textarea>
-    </div>
+  <label for="peGeneralCondition">
+    GENERAL CONDITION -
+  </label>
+  <textarea
+    id="peGeneralCondition"
+    placeholder="Contoh: A) SEDAR DAN BERNAFAS"
+  ></textarea>
+</div>
+
+<!-- HEAD -->
+<div class="pe-item form-group">
+  <label for="peHead">Head -</label>
+  <textarea id="peHead"></textarea>
+</div>
+
 
 <div class="pe-item form-group">
       <label for="peNeck">Neck -</label>
@@ -1582,9 +1596,11 @@ pulseRepeat: document.getElementById('pulseRepeat').value.trim(),
             painScore: document.getElementById('painScore').value.trim(),
             glucoseMeter: document.getElementById('glucoseMeter').value.trim()
           },
-          physicalExam: {
-            head: document.getElementById('peHead').value.trim(),
-            neck: document.getElementById('peNeck').value.trim(),
+          
+physicalExam: {
+  generalCondition: document.getElementById('peGeneralCondition').value.trim(),
+  head: document.getElementById('peHead').value.trim(),
+  neck: document.getElementById('peNeck').value.trim(),
             chest: document.getElementById('peChest').value.trim(),
             abdomen: document.getElementById('peAbdomen').value.trim(),
             pelvis: document.getElementById('pePelvis').value.trim(),
@@ -1720,9 +1736,15 @@ document.getElementById('gcsTotal').value = pc.gcsTotal || '';
 document.getElementById('painScore').value = pc.painScore || '';
 document.getElementById('glucoseMeter').value = pc.glucoseMeter || '';
 
-        const pe = rec.physicalExam || {};
-        document.getElementById('peHead').value = pe.head || '';
-        document.getElementById('peNeck').value = pe.neck || '';
+        
+const pe = rec.physicalExam || {};
+
+document.getElementById('peGeneralCondition').value =
+  pe.generalCondition || '';
+
+document.getElementById('peHead').value = pe.head || '';
+document.getElementById('peNeck').value = pe.neck || '';
+
         document.getElementById('peChest').value = pe.chest || '';
         document.getElementById('peAbdomen').value = pe.abdomen || '';
         document.getElementById('pePelvis').value = pe.pelvis || '';
@@ -1805,10 +1827,13 @@ const spo2RepeatText = pc.spo2Repeat || '';
           `Pain Score: ${pc.painScore || ''}/10`,
           `GLUCOSE METER: ${pc.glucoseMeter || ''}`,
           '',
-          'PHYSICAL EXAMANITION (GENERAL CONDITION)',
-          `Head- ${pe.head || ''}`,
-          `Neck- ${pe.neck || ''}`,
-          `Chest- ${pe.chest || ''}`,
+          
+'PHYSICAL EXAMINATION (GENERAL CONDITION)',
+`${pe.generalCondition || ''}`,
+`Head- ${pe.head || ''}`,
+`Neck- ${pe.neck || ''}`,
+`Chest- ${pe.chest || ''}`,
+
           `Abdomen - ${pe.abdomen || ''}`,
           `Pelvis- ${pe.pelvis || ''}`,
           `Perineal/Genitalia- ${pe.perineal || ''}`,
@@ -2233,3 +2258,5 @@ if ("serviceWorker" in navigator) {
 </script>
 </body>
 </html>
+
+
