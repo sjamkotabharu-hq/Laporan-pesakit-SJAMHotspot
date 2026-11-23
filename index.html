@@ -727,26 +727,95 @@ textarea {
 /* ==========================================================================
        PRINT STYLESHEET (CETAKAN REKOD RASMI)
        ========================================================================== */
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-      #printArea, #printArea * {
-        visibility: visible;
-      }
-      #printArea {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        padding: 12px;
-        background: #FFFFFF;
-        color: #000000;
-        font-family: Arial, sans-serif;
-        font-size: 12pt;
-        white-space: pre-wrap;
-      }
-    }
+    
+/* =====================================================
+   PRINT STYLESHEET - LAPORAN PDF RASMI
+   ===================================================== */
+
+@media print {
+
+  /* Tetapan kertas A4 */
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #FFFFFF !important;
+  }
+
+  /* Sembunyikan keseluruhan aplikasi */
+  body > * {
+    display: none !important;
+  }
+
+  /* Paparkan kawasan laporan sahaja */
+  body > #printArea {
+    display: block !important;
+    position: static !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: #FFFFFF !important;
+    color: #000000 !important;
+
+    font-family: Arial, sans-serif !important;
+    font-size: 10pt !important;
+
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  /* Pastikan kandungan laporan kelihatan */
+  #printArea,
+  #printArea * {
+    visibility: visible !important;
+  }
+
+  /* Tetapan jadual laporan */
+  #printArea table {
+    display: table !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  #printArea thead {
+    display: table-header-group !important;
+  }
+
+  #printArea tbody {
+    display: table-row-group !important;
+  }
+
+  #printArea tr {
+    display: table-row !important;
+  }
+
+  #printArea th,
+  #printArea td {
+    display: table-cell !important;
+    border: 1px solid #CBD5E1 !important;
+    padding: 8px !important;
+  }
+
+  /* Elakkan bahagian laporan terputus */
+  #printArea h2,
+  #printArea h3,
+  #printArea table,
+  #printArea tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+}
   </style>
 </head>
 <body>
@@ -826,93 +895,97 @@ textarea {
         </div>
       </div>
 
+
 <!-- ==================================================
      STATISTIK ZON & ANALISIS KES AMBULANS
      ================================================== -->
 
 <div class="card">
 
-<div class="card-header">
+  <div class="card-header">
 
-<h2 class="card-title">
+    <h2 class="card-title">
       STATISTIK ZON & ANALISIS KES
     </h2>
 
-<span class="badge" id="zoneStatsMonth">
+    <span class="badge" id="zoneStatsMonth">
       Bulan Semasa
     </span>
 
-</div>
+  </div>
 
-<div class="stats-grid">
+  <div class="stats-grid">
 
-<!-- RED ZONE -->
+    <!-- RED ZONE -->
     <div class="stat-box"
       style="background-color:#FCE7E7; border-color:#E8BABA;">
 
-<div class="stat-number"
+      <div class="stat-number"
         id="statRedZone"
         style="color:#A73535;">
         0
       </div>
 
-<div class="stat-label">
+      <div class="stat-label">
         RED ZONE
       </div>
 
-</div>
+    </div>
 
-<!-- YELLOW ZONE -->
+
+    <!-- YELLOW ZONE -->
     <div class="stat-box"
       style="background-color:#FFF1D6; border-color:#E8D09A;">
 
-<div class="stat-number"
+      <div class="stat-number"
         id="statYellowZone"
         style="color:#98640B;">
         0
       </div>
 
-<div class="stat-label">
+      <div class="stat-label">
         YELLOW ZONE
       </div>
 
-</div>
+    </div>
 
-<!-- GREEN ZONE -->
+
+    <!-- GREEN ZONE -->
     <div class="stat-box"
       style="background-color:#E0F1E5; border-color:#B7D8C0;">
 
-<div class="stat-number"
+      <div class="stat-number"
         id="statGreenZone"
         style="color:#287348;">
         0
       </div>
 
-<div class="stat-label">
+      <div class="stat-label">
         GREEN ZONE
       </div>
 
-</div>
+    </div>
 
-<!-- STANDDOWN -->
+
+    <!-- STANDDOWN -->
     <div class="stat-box"
       style="background-color:#E8EAF0; border-color:#C8CDD8;">
 
-<div class="stat-number"
+      <div class="stat-number"
         id="statStanddown"
         style="color:#475569;">
         0
       </div>
 
-<div class="stat-label">
+      <div class="stat-label">
         STANDDOWN
       </div>
 
-</div>
+    </div>
 
-</div>
+  </div>
 
-<!-- JUMLAH KESELURUHAN -->
+  <!-- JUMLAH KESELURUHAN -->
   <div style="
     background-color:var(--pastel-blue);
     border:1px solid var(--pastel-blue-border);
@@ -922,18 +995,18 @@ textarea {
     margin-top:12px;
   ">
 
-<div class="stat-label">
+    <div class="stat-label">
       JUMLAH KESELURUHAN 4 KATEGORI
     </div>
 
-<div class="stat-number"
+    <div class="stat-number"
       id="statZoneTotal">
       0
     </div>
 
-</div>
+  </div>
 
-<p style="
+  <p style="
     font-size:0.78rem;
     color:var(--text-muted);
     margin-top:10px;
@@ -946,68 +1019,72 @@ textarea {
 
 <!-- TAMAT STATISTIK ZON -->
 
+
 <!-- ==================================================
      ANALISIS GRAF ZON AMBULANS
      ================================================== -->
 
 <div class="card">
 
-<div class="card-header">
+  <div class="card-header">
 
-<h2 class="card-title">
+    <h2 class="card-title">
       GRAF & ANALISIS OPERASI
     </h2>
 
-</div>
+  </div>
 
-<!-- PILIH BULAN ANALISIS -->
+  <!-- PILIH BULAN ANALISIS -->
   <div class="form-group" style="margin-bottom:18px;">
 
-<label for="dashboardStatsMonth">
+    <label for="dashboardStatsMonth">
       PILIH BULAN ANALISIS:
     </label>
 
-<select
+    <select
       id="dashboardStatsMonth"
       onchange="updateDashboard()">
     </select>
 
-<small style="color:var(--text-muted);">
+    <small style="color:var(--text-muted);">
       Pilih bulan untuk melihat statistik dan graf.
     </small>
 
-</div>
+  </div>
 
-<!-- GRAF PERBANDINGAN -->
+
+  <!-- GRAF PERBANDINGAN -->
   <div style="margin-bottom:24px;">
 
-<h3 style="font-size:0.95rem;margin-bottom:12px;">
+    <h3 style="font-size:0.95rem;margin-bottom:12px;">
       1. GRAF PERBANDINGAN ZON
     </h3>
 
-<div id="chartZoneComparison"></div>
+    <div id="chartZoneComparison"></div>
 
-</div>
+  </div>
 
-<!-- GRAF PERATUSAN -->
+
+  <!-- GRAF PERATUSAN -->
   <div style="margin-bottom:24px;">
 
-<h3 style="font-size:0.95rem;margin-bottom:12px;">
+    <h3 style="font-size:0.95rem;margin-bottom:12px;">
       2. PERATUSAN MENGIKUT ZON
     </h3>
 
-<div id="chartZonePercentage"></div>
+    <div id="chartZonePercentage"></div>
 
-</div>
+  </div>
 
-<!-- GRAF TREND BULANAN -->
+
+  <!-- GRAF TREND BULANAN -->
   <div>
 
-<h3 style="font-size:0.95rem;margin-bottom:12px;">
+    <h3 style="font-size:0.95rem;margin-bottom:12px;">
       3. TREND OPERASI BULANAN
     </h3>
 
-<p style="
+    <p style="
       font-size:0.8rem;
       color:var(--text-muted);
       margin-bottom:12px;
@@ -1015,9 +1092,37 @@ textarea {
       Perbandingan jumlah kes bagi enam bulan terkini.
     </p>
 
+    
 <div id="chartMonthlyTrend"></div>
 
-</div>
+  </div>
+
+  <!-- BUTANG JANA LAPORAN PDF -->
+  <div style="
+    margin-top:20px;
+    border-top:1px solid var(--border-color);
+    padding-top:18px;
+  ">
+
+    <button
+      type="button"
+      class="btn btn-primary btn-block"
+      onclick="printMonthlyZoneReport()">
+
+      JANA LAPORAN STATISTIK BULANAN (PDF)
+
+    </button>
+
+    <p style="
+      font-size:0.78rem;
+      color:var(--text-muted);
+      text-align:center;
+      margin-top:8px;
+    ">
+      Laporan mengandungi statistik empat kategori zon sahaja.
+    </p>
+
+  </div>
 
 </div>
 
@@ -1295,6 +1400,7 @@ textarea {
     </h2>
   </div>
 
+
 <div class="pe-grid">
 
 <!-- GENERAL CONDITION - KOTAK BAHARU -->
@@ -1313,6 +1419,7 @@ textarea {
   <label for="peHead">Head -</label>
   <textarea id="peHead"></textarea>
 </div>
+
 
 <div class="pe-item form-group">
       <label for="peNeck">Neck -</label>
@@ -1379,21 +1486,21 @@ textarea {
             </div>
             <div class="form-group">
               <label for="zone">ZONE -</label>
-
+              
 <select id="zone">
   <option value="">-- Pilih Zon --</option>
 
-<option value="RED ZONE">RED ZONE</option>
+  <option value="RED ZONE">RED ZONE</option>
 
-<option value="YELLOW ZONE">YELLOW ZONE</option>
+  <option value="YELLOW ZONE">YELLOW ZONE</option>
 
-<option value="GREEN ZONE">GREEN ZONE</option>
+  <option value="GREEN ZONE">GREEN ZONE</option>
 
-<option value="STANDDOWN">STANDDOWN</option>
+  <option value="STANDDOWN">STANDDOWN</option>
 
-<option value="CCARS / ISOLATION">CCARS / ISOLATION</option>
+  <option value="CCARS / ISOLATION">CCARS / ISOLATION</option>
 
-<option value="LAIN-LAIN">LAIN-LAIN</option>
+  <option value="LAIN-LAIN">LAIN-LAIN</option>
 </select>
             </div>
           </div>
@@ -1420,17 +1527,18 @@ textarea {
           <span class="badge" id="totalSavedBadge">0 Rekod</span>
         </div>
 
+
 <!-- PILIH BULAN REKOD -->
 <div class="form-group" style="margin-bottom: 16px;">
 
-<label for="monthFilter">
+  <label for="monthFilter">
     PILIH BULAN REKOD:
   </label>
 
-<select id="monthFilter" onchange="renderRecordsList()">
+  <select id="monthFilter" onchange="renderRecordsList()">
   </select>
 
-<small style="color: var(--text-muted);">
+  <small style="color: var(--text-muted);">
     Pilih bulan untuk melihat semua sejarah kes ambulans.
   </small>
 
@@ -1439,12 +1547,12 @@ textarea {
 <!-- CARIAN REKOD -->
 <div class="search-box">
 
-<svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <circle cx="11" cy="11" r="8"></circle>
     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
   </svg>
 
-<input
+  <input
     type="text"
     id="searchInput"
     placeholder="Cari CALL CARD NO atau TARIKH (YYYY-MM-DD)..."
@@ -1452,6 +1560,7 @@ textarea {
   >
 
 </div>
+
 
 <div id="recordsListContainer"></div>
       </div>
@@ -3080,6 +3189,276 @@ function updateZoneAnalytics() {
 }
 
 
+/* =====================================================
+   JANA LAPORAN STATISTIK BULANAN PDF
+   EMPAT KATEGORI ZON SAHAJA
+   ===================================================== */
+
+window.printMonthlyZoneReport = function () {
+
+  const monthSelect =
+    document.getElementById('dashboardStatsMonth');
+
+  const printArea =
+    document.getElementById('printArea');
+
+  if (!monthSelect || !monthSelect.value) {
+    showToast('Sila pilih bulan analisis dahulu.');
+    return;
+  }
+
+  const selectedMonth = monthSelect.value;
+
+  const parts = selectedMonth.split('-');
+
+  const year = Number(parts[0]);
+  const month = Number(parts[1]);
+
+  const monthLabel = new Date(
+    year,
+    month - 1,
+    1
+  ).toLocaleDateString('ms-MY', {
+    month: 'long',
+    year: 'numeric'
+  });
+
+  // Empat kategori sahaja
+  const zones = [
+    {
+      name: 'RED ZONE',
+      color: '#C94C4C'
+    },
+    {
+      name: 'YELLOW ZONE',
+      color: '#D9A02F'
+    },
+    {
+      name: 'GREEN ZONE',
+      color: '#4D9B70'
+    },
+    {
+      name: 'STANDDOWN',
+      color: '#64748B'
+    }
+  ];
+
+  // Ambil rekod bulan dipilih
+  const monthlyRecords = records.filter(record =>
+    getMonthKey(record.tarikh) === selectedMonth
+  );
+
+  // Kira setiap kategori
+  const results = zones.map(zone => {
+
+    const count = monthlyRecords.filter(record =>
+      String(record.zone || '')
+        .trim()
+        .toUpperCase() === zone.name
+    ).length;
+
+    return {
+      ...zone,
+      count
+    };
+
+  });
+
+  const total = results.reduce(
+    (sum, item) => sum + item.count,
+    0
+  );
+
+  const generatedDate =
+    new Date().toLocaleDateString('ms-MY');
+
+  const maxCount = Math.max(
+    1,
+    ...results.map(item => item.count)
+  );
+
+  // Jana jadual laporan
+  const tableRows = results.map(item => {
+
+    const percentage = total > 0
+      ? (item.count / total * 100).toFixed(1)
+      : '0.0';
+
+    return `
+      <tr>
+        <td>${item.name}</td>
+        <td style="text-align:center;">
+          ${item.count}
+        </td>
+        <td style="text-align:center;">
+          ${percentage}%
+        </td>
+      </tr>
+    `;
+
+  }).join('');
+
+  // Jana graf bar
+  const graphRows = results.map(item => {
+
+    const width =
+      (item.count / maxCount) * 100;
+
+    return `
+      <div style="margin-bottom:18px;">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          margin-bottom:6px;
+          font-weight:bold;
+        ">
+          <span>${item.name}</span>
+          <span>${item.count} kes</span>
+        </div>
+
+        <div style="
+          height:16px;
+          background:#E9EDF2;
+          border-radius:10px;
+          overflow:hidden;
+        ">
+          <div style="
+            width:${width}%;
+            height:16px;
+            background:${item.color};
+          "></div>
+        </div>
+
+      </div>
+    `;
+
+  }).join('');
+
+  // Bina laporan
+  printArea.innerHTML = `
+
+    <div style="
+      font-family:Arial,sans-serif;
+      color:#1E293B;
+      white-space:normal;
+      line-height:1.5;
+    ">
+
+      <div style="
+        text-align:center;
+        border-bottom:2px solid #4A7C9B;
+        padding-bottom:18px;
+        margin-bottom:22px;
+      ">
+
+        <h2 style="margin:0 0 8px;">
+          SJAM AMBULANS HOTSPOT 999
+        </h2>
+
+        <h3 style="margin:0;">
+          LAPORAN STATISTIK OPERASI AMBULANS
+        </h3>
+
+        <p style="margin:8px 0 0;">
+          BULAN ${monthLabel.toUpperCase()}
+        </p>
+
+      </div>
+
+      <p>
+        <strong>Tarikh laporan:</strong>
+        ${generatedDate}
+      </p>
+
+      <h3 style="margin-top:24px;">
+        1. RINGKASAN STATISTIK ZON
+      </h3>
+
+      <table style="
+        width:100%;
+        border-collapse:collapse;
+        margin-top:12px;
+      ">
+
+        <thead>
+          <tr style="background:#E3EFF7;">
+            <th style="padding:10px;border:1px solid #CBD5E1;text-align:left;">
+              KATEGORI
+            </th>
+            <th style="padding:10px;border:1px solid #CBD5E1;">
+              JUMLAH KES
+            </th>
+            <th style="padding:10px;border:1px solid #CBD5E1;">
+              PERATUS
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${tableRows}
+
+          <tr style="background:#E3EFF7;font-weight:bold;">
+            <td style="padding:10px;border:1px solid #CBD5E1;">
+              JUMLAH KESELURUHAN
+            </td>
+            <td style="padding:10px;border:1px solid #CBD5E1;text-align:center;">
+              ${total}
+            </td>
+            <td style="padding:10px;border:1px solid #CBD5E1;text-align:center;">
+              ${total > 0 ? '100.0%' : '0.0%'}
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <h3 style="margin-top:30px;">
+        2. GRAF PERBANDINGAN ZON
+      </h3>
+
+      <div style="margin-top:18px;">
+        ${graphRows}
+      </div>
+
+      <h3 style="margin-top:30px;">
+        3. RUMUSAN
+      </h3>
+
+      <p>
+        Jumlah keseluruhan rekod bagi empat kategori zon
+        untuk bulan ${monthLabel} ialah
+        <strong>${total} kes</strong>.
+      </p>
+
+      <p style="
+        margin-top:45px;
+        text-align:center;
+        font-size:11px;
+        color:#64748B;
+      ">
+        LAPORAN STATISTIK OPERASI AMBULANS<br>
+        SJAM AMBULANS HOTSPOT 999
+      </p>
+
+    </div>
+
+  `;
+
+  // Cetak atau simpan sebagai PDF
+  printArea.style.display = 'block';
+
+  window.print();
+
+  // Kosongkan kawasan laporan selepas cetakan
+  printArea.innerHTML = '';
+  printArea.style.display = 'none';
+
+};
+
+
+
       /* ----------------------------------------------------------------------
          8. EXPORT & IMPORT BACKUP (JSON)
          ---------------------------------------------------------------------- */
@@ -3205,3 +3584,5 @@ if ("serviceWorker" in navigator) {
 </script>
 </body>
 </html>
+
+
